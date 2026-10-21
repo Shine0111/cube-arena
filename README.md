@@ -1,4 +1,4 @@
-# CUBE ARENA — Next.js starter
+# CUBE ARENA — Next.js
 
 A responsive Next.js + TypeScript starting point for the CUBE ARENA multiplayer speedcubing project. The dashboard layout follows the supplied `DESIGN.md` and the home dashboard `code.html` as visual references.
 
