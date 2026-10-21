@@ -29,7 +29,13 @@ export default function LoginForm() {
       return;
     }
 
-    router.push("/onboarding");
+    const params = new URLSearchParams(window.location.search);
+    const next = params.get("next");
+
+    const destination =
+      next?.startsWith("/") && !next.startsWith("//") ? next : "/onboarding";
+
+    router.push(destination);
     router.refresh();
   }
 
