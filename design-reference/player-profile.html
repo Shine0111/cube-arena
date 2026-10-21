@@ -1,0 +1,677 @@
+<!DOCTYPE html><html class="dark" lang="en" style="" data-lt-installed="true"><head></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col justify-between"><svg class="inline-defs-container" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"></svg><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Cube Arena - Competitive Multiplayer Speedcubing</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-tertiary-fixed":"#400011","tertiary-fixed-dim":"#ffb2ba","on-secondary":"#00363d","surface-container":"#1c2025","on-secondary-fixed":"#001f24","surface-bright":"#36393f","on-secondary-container":"#00616d","secondary-container":"#00e3fd","tertiary-container":"#ffd4d7","on-tertiary-fixed-variant":"#910030","secondary":"#bdf4ff","inverse-surface":"#e0e2ea","surface-container-highest":"#31353b","on-tertiary-container":"#c40044","primary-fixed-dim":"#00e478","surface-container-lowest":"#0a0e14","primary-container":"#00ff87","outline-variant":"#3b4b3d","on-error":"#690005","secondary-fixed-dim":"#00daf3","secondary-fixed":"#9cf0ff","inverse-primary":"#006d36","surface-container-low":"#181c21","tertiary":"#fffaf9","outline":"#849585","on-surface-variant":"#b9cbb9","on-primary-fixed-variant":"#005227","on-tertiary":"#670020","on-primary-container":"#007138","surface-dim":"#101419","on-primary-fixed":"#00210c","on-error-container":"#ffdad6","primary":"#f1ffef","inverse-on-surface":"#2d3136","surface-tint":"#00e478","on-secondary-fixed-variant":"#004f58","surface-container-high":"#262a30","on-primary":"#003919","primary-fixed":"#60ff98","on-background":"#e0e2ea","error-container":"#93000a","on-surface":"#e0e2ea","surface":"#101419","background":"#101419","tertiary-fixed":"#ffd9dc","surface-variant":"#31353b","error":"#ffb4ab"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-sm":"0.5rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","gutter":"1rem","space-xs":"0.25rem","space-xl":"2.5rem","margin-desktop":"2.5rem","space-md":"1rem","margin":"1rem"},fontFamily:{"label-mono-sm":["JetBrains Mono"],"scramble-lg":["JetBrains Mono"],"display-timer":["JetBrains Mono"],"headline-md":["Space Grotesk"],"body-lg":["Geist"],"headline-lg-mobile":["Space Grotesk"],"display-timer-mobile":["JetBrains Mono"],"headline-lg":["Space Grotesk"],"scramble-sm":["JetBrains Mono"],"body-sm":["Geist"],"label-mono-xs":["JetBrains Mono"],"headline-sm":["Space Grotesk"],"body-md":["Geist"]},fontSize:{"label-mono-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}],"scramble-lg":["24px",{"lineHeight":"36px","letterSpacing":"0.08em","fontWeight":"500"}],"display-timer":["96px",{"lineHeight":"96px","letterSpacing":"-0.04em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-timer-mobile":["56px",{"lineHeight":"56px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"scramble-sm":["16px",{"lineHeight":"24px","letterSpacing":"0.06em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-mono-xs":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.6)]"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm cursor-pointer"><img alt="Cube Arena Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VQhT8H494EXPxX3NWhb9xaTsVMXIxqEiyhZM7sAQo3PUdu5bvoVCCXf_pxFSlfnuf6sGJNZM12VxRzH64DJaxr-wH-juVScA9Enr8HAtnzCDmQLUTcUwDhKwMAJ4jXGF1gj1_CYQSoYiPsGu31qjvyXhV8CubEKB7udG1bvcKl56QVEkStmxvmTkQsLge18199E1wnIOTpjn9dVo3v3g3Fwv_3nJd9eGWgPsO5gMDWrGHoGyy2t0j1cQ0"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-primary">CUBE ARENA</span><div class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse"></span></div></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-bold"><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="home" href="#">Home</a><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="multiplayer-rooms" href="#">Multiplayer Rooms</a><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="global-rankings" href="#">Global Rankings</a><a aria-current="page" class="px-space-md py-space-xs transition-all bg-surface-container-high text-primary font-bold" data-path="profile" href="#">Profile</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-1.5 bg-surface-container px-space-sm py-1"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed">14ms Frankfurt</span></div><button class="flex items-center gap-1.5 bg-surface-container px-space-md py-space-xs font-label-mono-sm text-label-mono-sm text-primary-container hover:bg-primary-container hover:text-on-primary-container transition-all" type="button"><span class="material-symbols-outlined text-sm leading-none">add</span><span class="">New Room</span></button><div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-1"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Mr2ho7p06z6u2Y8tFAxL2rr1fM9oZi1kFLoQ6kaA5o7DPhLBiiGgYy8tiFbQQ4P0iqn01NR_iKsHc3nzjAmzmad4dpCGQtMz3Ccp_XAshZi-QtEMSO_DbCktARfrsko2V7aPs3hFqye2sJIK_4ta3MQmJ8Sm-NkeHOaeXZyB3x718dJELPL_xNKPzvNfbqtqtGj6IdSRRYJRCaJZdQ0WF4kmz-Iib2QpHpAFFBNK06w-6IXRr9yi"><div class="hidden sm:flex flex-col text-left"><div class="flex items-center gap-1.5"><span class="font-body-sm text-body-sm font-semibold text-on-surface">Shine</span><span class="bg-surface-container-highest px-1 font-label-mono-xs text-label-mono-xs text-secondary">#128 Global 3x3</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">@shine_cubes</span></div><button aria-label="Settings" class="text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg leading-none">settings</span></button></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- Subtle ambient glow background decoration -->
+<div class="relative w-full overflow-hidden">
+<div class="absolute -top-32 left-1/4 w-96 h-96 bg-primary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<div class="absolute top-48 right-10 w-80 h-80 bg-secondary-container/10 rounded-full blur-3xl pointer-events-none"></div>
+<!-- PROFILE HERO BANNER -->
+<section class="relative w-full px-gutter md:px-gutter-desktop pt-space-lg pb-space-xl">
+<!-- Geometric wireframe isometric cube art container -->
+<div class="relative w-full rounded-xl bg-surface-container-low p-space-md md:p-space-xl shadow-xl overflow-hidden">
+<!-- Background SVG Geometric Isometric Grid -->
+<svg class="absolute inset-0 w-full h-full opacity-15 pointer-events-none" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="103.92" id="iso-cubing-pattern" patternTransform="scale(1)" patternUnits="userSpaceOnUse" width="60">
+<path class="text-primary-fixed-dim" d="M30 0 L60 17.32 L60 51.96 L30 69.28 L0 51.96 L0 17.32 Z" fill="none" stroke="currentColor" stroke-width="0.75"></path>
+<path class="text-secondary" d="M30 0 L30 34.64 L60 51.96" fill="none" stroke="currentColor" stroke-width="0.75"></path>
+<path class="text-primary-fixed-dim" d="M30 34.64 L0 51.96" fill="none" stroke="currentColor" stroke-width="0.75"></path>
+<path class="text-outline-variant" d="M30 69.28 L30 103.92" fill="none" stroke="currentColor" stroke-width="0.75"></path>
+</pattern>
+</defs>
+<rect fill="url(#iso-cubing-pattern)" height="100%" width="100%"></rect>
+</svg>
+<!-- Vertical accent edge line -->
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-gradient-to-b from-primary-container via-secondary-container to-transparent"></div>
+<div class="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-space-lg">
+<!-- Left: Avatar & Identity Cluster -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-space-lg">
+<!-- Avatar Frame with tournament badge corner -->
+<div class="relative group">
+<div class="w-28 h-28 sm:w-32 sm:h-32 rounded-xl overflow-hidden shadow-2xl bg-surface-container-highest ring-0">
+<img alt="Shine Profile Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Mr2ho7p06z6u2Y8tFAxL2rr1fM9oZi1kFLoQ6kaA5o7DPhLBiiGgYy8tiFbQQ4P0iqn01NR_iKsHc3nzjAmzmad4dpCGQtMz3Ccp_XAshZi-QtEMSO_DbCktARfrsko2V7aPs3hFqye2sJIK_4ta3MQmJ8Sm-NkeHOaeXZyB3x718dJELPL_xNKPzvNfbqtqtGj6IdSRRYJRCaJZdQ0WF4kmz-Iib2QpHpAFFBNK06w-6IXRr9yi">
+</div>
+<div class="absolute -bottom-2 -right-2 bg-primary-container text-on-primary-container px-2 py-0.5 rounded-full flex items-center gap-1 shadow-md">
+<span class="material-symbols-outlined text-xs leading-none">verified</span>
+<span class="font-label-mono-xs text-label-mono-xs font-bold uppercase">PRO</span>
+</div>
+</div>
+<!-- Identity Badges & Handles -->
+<div class="flex flex-col gap-space-xs">
+<div class="flex flex-wrap items-center gap-space-xs">
+<span class="text-xl leading-none">🇬🇧</span>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight font-bold">Shine</h1>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">@shine_cubes</span>
+<span class="inline-flex items-center gap-1 bg-surface-container-highest px-space-sm py-0.5 rounded-full text-secondary font-label-mono-xs text-label-mono-xs">
+<span class="material-symbols-outlined text-xs leading-none">check_circle</span>
+                  Verified Competitor
+                </span>
+</div>
+<!-- Metadata Chips -->
+<div class="flex flex-wrap items-center gap-space-sm mt-1">
+<div class="bg-surface-container px-space-sm py-1 rounded flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface font-semibold">Global Rank #128</span>
+</div>
+<div class="bg-surface-container px-space-sm py-1 rounded flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs text-on-surface-variant">calendar_month</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Joined Season 1</span>
+</div>
+<div class="bg-surface-container px-space-sm py-1 rounded flex items-center gap-1.5">
+<span class="material-symbols-outlined text-xs text-secondary-container">bolt</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary-container font-medium">3x3 Specialist</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Profile Command Actions -->
+<div class="flex flex-wrap items-center gap-space-xs sm:gap-space-sm">
+<button class="flex items-center gap-1.5 bg-primary-container text-on-primary-container px-space-md py-space-xs rounded font-label-mono-sm text-label-mono-sm font-semibold hover:bg-primary-fixed-dim transition-all shadow-md active:scale-95" type="button">
+<span class="material-symbols-outlined text-base">edit</span>
+<span class="">Edit Profile</span>
+</button>
+<button class="flex items-center gap-1.5 bg-surface-container text-on-surface hover:text-primary hover:bg-surface-container-high px-space-md py-space-xs rounded font-label-mono-sm text-label-mono-sm transition-all shadow-sm" type="button">
+<span class="material-symbols-outlined text-base">share</span>
+<span class="">Share Public Profile</span>
+</button>
+<button aria-label="Settings" class="flex items-center justify-center p-space-xs bg-surface-container text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded transition-all" type="button">
+<span class="material-symbols-outlined text-xl">settings</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 2: PERSONAL PERFORMANCE QUICK STATS -->
+<section class="w-full px-gutter md:px-gutter-desktop pb-space-lg">
+<div class="grid grid-cols-2 md:grid-cols-5 gap-space-sm md:gap-space-md">
+<!-- Stat Card 1: Matches -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-md">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs uppercase tracking-wider">Total Matches</span>
+<span class="material-symbols-outlined text-sm text-secondary">swords</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">24</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">ranked</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-secondary-container h-full w-full"></div>
+</div>
+</div>
+<!-- Stat Card 2: Wins / Winrate -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-md">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs uppercase tracking-wider">Wins &amp; Ratio</span>
+<span class="material-symbols-outlined text-sm text-primary-container">trophy</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">15</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary-container font-semibold">62.5% WR</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-primary-container h-full" style="width: 62.5%;"></div>
+</div>
+</div>
+<!-- Stat Card 3: Podiums -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-md">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs uppercase tracking-wider">Podiums</span>
+<span class="material-symbols-outlined text-sm text-secondary-fixed">military_tech</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">21</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed">87.5% Pod Rate</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-secondary-fixed h-full" style="width: 87.5%;"></div>
+</div>
+</div>
+<!-- Stat Card 4: Total Solves -->
+<div class="bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-md">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs uppercase tracking-wider">Total Solves</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">timer</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">148</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">arena turns</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-surface-bright h-full w-4/5"></div>
+</div>
+</div>
+<!-- Stat Card 5: Hours Competed -->
+<div class="col-span-2 md:col-span-1 bg-surface-container-low p-space-md rounded-xl flex flex-col justify-between shadow-md">
+<div class="flex items-center justify-between text-on-surface-variant mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs uppercase tracking-wider">Hours Competed</span>
+<span class="material-symbols-outlined text-sm text-on-surface-variant">pace</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="font-headline-lg text-headline-lg text-primary font-bold">18.4</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">hrs</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1 rounded-full mt-space-sm overflow-hidden">
+<div class="bg-primary-fixed-dim h-full w-3/4"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- SECTION 3: BEST RESULTS BY EVENT TABLE -->
+<section class="w-full px-gutter md:px-gutter-desktop pb-space-xl">
+<div class="bg-surface-container-low rounded-xl p-space-md md:p-space-lg shadow-xl flex flex-col gap-space-md">
+<!-- Section Header with Distinction Note Badge -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pb-space-xs">
+<div class="flex items-center gap-space-sm">
+<div class="w-2.5 h-6 bg-primary-container rounded-sm"></div>
+<h2 class="font-headline-md text-headline-md text-primary font-bold tracking-tight">BEST RESULTS BY EVENT</h2>
+</div>
+<div class="inline-flex items-center gap-1.5 bg-surface-container px-space-sm py-1 rounded text-primary-fixed-dim font-label-mono-xs text-label-mono-xs shadow-inner">
+<span class="material-symbols-outlined text-xs text-primary-container">star</span>
+<span class="">Competition records are permanently derived from verified multiplayer matches.</span>
+</div>
+</div>
+<!-- High-density Data Table Container -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest text-on-surface-variant font-label-mono-xs text-label-mono-xs uppercase tracking-wider">
+<th class="py-space-sm px-space-md">Event</th>
+<th class="py-space-sm px-space-md">Best Single (Competition)</th>
+<th class="py-space-sm px-space-md">Best Ao5 (Competition)</th>
+<th class="py-space-sm px-space-md">Personal Practice Best</th>
+<th class="py-space-sm px-space-md text-right">Status Tier</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container font-body-md text-body-md">
+<!-- Row 1: 3x3x3 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">3×3×3 Cube</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-primary-container">12.84 s</span>
+<a class="font-label-mono-xs text-label-mono-xs text-secondary bg-surface-container px-1.5 py-0.5 rounded hover:bg-secondary hover:text-on-secondary transition-colors" href="#">#CA-8419</a>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-secondary">13.49 s</span>
+<a class="font-label-mono-xs text-label-mono-xs text-secondary bg-surface-container px-1.5 py-0.5 rounded hover:bg-secondary hover:text-on-secondary transition-colors" href="#">#CA-8920</a>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="font-scramble-sm text-scramble-sm text-on-surface font-semibold">11.20 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-highest px-1 rounded">Local</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<span class="inline-flex items-center gap-1 bg-surface-container-highest text-primary-container font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded font-bold">
+<span class="material-symbols-outlined text-xs">workspace_premium</span>
+                    Master Tier
+                  </span>
+</td>
+</tr>
+<!-- Row 2: 2x2x2 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary-container"></span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">2×2×2 Cube</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-primary-container">4.21 s</span>
+<a class="font-label-mono-xs text-label-mono-xs text-secondary bg-surface-container px-1.5 py-0.5 rounded hover:bg-secondary hover:text-on-secondary transition-colors" href="#">#CA-7102</a>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-secondary">5.12 s</span>
+<a class="font-label-mono-xs text-label-mono-xs text-secondary bg-surface-container px-1.5 py-0.5 rounded hover:bg-secondary hover:text-on-secondary transition-colors" href="#">#CA-7102</a>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="font-scramble-sm text-scramble-sm text-on-surface font-semibold">3.85 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-highest px-1 rounded">Local</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<span class="inline-flex items-center gap-1 bg-surface-container-highest text-secondary font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded font-bold">
+<span class="material-symbols-outlined text-xs">diamond</span>
+                    Diamond Tier
+                  </span>
+</td>
+</tr>
+<!-- Row 3: 4x4x4 -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-bright"></span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">4×4×4 Cube</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-primary-container">48.72 s</span>
+<a class="font-label-mono-xs text-label-mono-xs text-secondary bg-surface-container px-1.5 py-0.5 rounded hover:bg-secondary hover:text-on-secondary transition-colors" href="#">#CA-4311</a>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-secondary">52.31 s</span>
+<a class="font-label-mono-xs text-label-mono-xs text-secondary bg-surface-container px-1.5 py-0.5 rounded hover:bg-secondary hover:text-on-secondary transition-colors" href="#">#CA-4311</a>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="font-scramble-sm text-scramble-sm text-on-surface font-semibold">46.10 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-highest px-1 rounded">Local</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<span class="inline-flex items-center gap-1 bg-surface-container-highest text-on-surface font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded font-bold">
+<span class="material-symbols-outlined text-xs">shield</span>
+                    Platinum Tier
+                  </span>
+</td>
+</tr>
+<!-- Row 4: 3x3 One-Handed -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-bright"></span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">3×3 One-Handed</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-primary-container">22.15 s</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-secondary">24.80 s</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="font-scramble-sm text-scramble-sm text-on-surface font-semibold">20.90 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-highest px-1 rounded">Local</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<span class="inline-flex items-center gap-1 bg-surface-container-highest text-secondary-fixed font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded font-bold">
+<span class="material-symbols-outlined text-xs">star_half</span>
+                    Gold Tier
+                  </span>
+</td>
+</tr>
+<!-- Row 5: Pyraminx -->
+<tr class="hover:bg-surface-container/60 transition-colors">
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-surface-bright"></span>
+<span class="font-headline-sm text-headline-sm text-primary font-bold">Pyraminx</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-primary-container">6.40 s</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-2">
+<span class="font-scramble-sm text-scramble-sm font-bold text-secondary">7.95 s</span>
+</div>
+</td>
+<td class="py-space-md px-space-md">
+<div class="flex items-center gap-1.5">
+<span class="font-scramble-sm text-scramble-sm text-on-surface font-semibold">5.90 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-highest px-1 rounded">Local</span>
+</div>
+</td>
+<td class="py-space-md px-space-md text-right">
+<span class="inline-flex items-center gap-1 bg-surface-container-highest text-secondary-fixed font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded font-bold">
+<span class="material-symbols-outlined text-xs">star_half</span>
+                    Gold Tier
+                  </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- SECTION 4: TABBED BOTTOM SECTION -->
+<section class="w-full px-gutter md:px-gutter-desktop pb-space-xl">
+<!-- Tab Header Strip -->
+<div class="flex flex-wrap items-center gap-space-xs border-b border-surface-container-high pb-space-xs mb-space-md" id="profile-tabs">
+<button class="profile-tab-active flex items-center gap-2 px-space-md py-space-xs rounded bg-surface-container font-headline-sm text-headline-sm text-primary transition-all" id="tab-btn-history" onclick="switchProfileTab('history')" type="button">
+<span class="material-symbols-outlined text-sm text-primary-container">history</span>
+<span class="">Recent Competition History</span>
+<span class="bg-primary-container text-on-primary-container font-label-mono-xs text-label-mono-xs px-1.5 py-0.2 rounded-full font-bold">24</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-space-xs rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50 font-headline-sm text-headline-sm transition-all" id="tab-btn-breakdowns" onclick="switchProfileTab('breakdowns')" type="button">
+<span class="material-symbols-outlined text-sm">analytics</span>
+<span class="">Solve History &amp; Breakdowns</span>
+</button>
+<button class="flex items-center gap-2 px-space-md py-space-xs rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container/50 font-headline-sm text-headline-sm transition-all" id="tab-btn-h2h" onclick="switchProfileTab('h2h')" type="button">
+<span class="material-symbols-outlined text-sm">groups</span>
+<span class="">Head-to-Head Records</span>
+</button>
+</div>
+<!-- TAB PANEL 1: RECENT COMPETITION HISTORY (ACTIVE) -->
+<div class="flex flex-col gap-space-md" id="panel-history">
+<!-- MATCH CARD 1: 1st Place Victory -->
+<div class="relative bg-surface-container-low rounded-xl p-space-md md:p-space-lg shadow-xl overflow-hidden group">
+<!-- Subtle Glow Edge -->
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mb-space-md">
+<!-- Left Info & Podium Result -->
+<div class="flex flex-col sm:flex-row sm:items-center gap-space-md">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-primary-container/10 text-primary-container">
+<span class="font-headline-md text-headline-md font-bold">1st</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">3×3×3 Grand Championship #CA-8920</span>
+<span class="bg-surface-container text-primary-fixed-dim font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded">Multiplayer Room</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">25 mins ago</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Host: CubeArena EU-Central Node • 4 Competitors</span>
+</div>
+</div>
+<!-- Match Metric Totals -->
+<div class="flex items-center gap-space-lg">
+<div class="flex flex-col items-end">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Ao5 Result</span>
+<span class="font-scramble-sm text-scramble-sm text-primary-container font-bold">13.49 s</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Best Single</span>
+<span class="font-scramble-sm text-scramble-sm text-secondary font-bold">12.84 s</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Rating Delta</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary-container font-bold">+38 MMR</span>
+</div>
+</div>
+</div>
+<!-- Mid: Scrambles & 5-Solve Progression -->
+<div class="bg-surface-container rounded-lg p-space-sm mb-space-md">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Solve Progression &amp; TNoodle Scrambles</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary">Final Round Ao5</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-space-xs">
+<!-- Solve 1 -->
+<div class="bg-surface-container-high p-2 rounded flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">S1</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">13.20</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">R' U' F R2 U' B2 D F2</span>
+</div>
+<!-- Solve 2 (Fastest) -->
+<div class="bg-surface-container-high p-2 rounded flex flex-col border border-primary-container/20">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-primary-container font-semibold">S2 (PB)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary-container font-bold">12.84</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">U2 R F2 L2 D2 B' R2 B</span>
+</div>
+<!-- Solve 3 -->
+<div class="bg-surface-container-high p-2 rounded flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">S3</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">13.60</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">F' D2 L2 U2 B' R F' U</span>
+</div>
+<!-- Solve 4 -->
+<div class="bg-surface-container-high p-2 rounded flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">S4</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">13.67</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">D B2 L2 F2 D' L2 R2 B'</span>
+</div>
+<!-- Solve 5 (Slowest / Discarded) -->
+<div class="bg-surface-container-high p-2 rounded flex flex-col opacity-75">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant line-through">S5 (slow)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant line-through">14.92</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">L2 B2 D2 R' F2 L' U' B2</span>
+</div>
+</div>
+</div>
+<!-- Bottom: Opponents & Micro Time Distribution Sparkline -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pt-space-xs">
+<!-- Competitors -->
+<div class="flex items-center gap-space-md">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Opponents:</span>
+<div class="flex items-center gap-space-sm">
+<div class="flex items-center gap-1.5 bg-surface-container px-2 py-1 rounded">
+<span class="font-label-mono-xs text-label-mono-xs text-secondary">2nd</span>
+<span class="font-body-sm text-body-sm text-on-surface">@feliks_fan</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">(13.88s)</span>
+</div>
+<div class="flex items-center gap-1.5 bg-surface-container px-2 py-1 rounded">
+<span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed">3rd</span>
+<span class="font-body-sm text-body-sm text-on-surface">@matsu_cubes</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">(14.21s)</span>
+</div>
+</div>
+</div>
+<!-- Mini Inline SVG Sparkline for Distribution -->
+<div class="flex items-center gap-space-sm">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Pace Dispersion:</span>
+<svg class="w-32 h-6" fill="none" viewBox="0 0 120 24">
+<!-- Area Gradient Background -->
+<path d="M0 16 L25 11 L50 4 L75 18 L100 20 L120 17 L120 24 L0 24 Z" fill="rgba(0, 255, 135, 0.15)"></path>
+<!-- Trend line -->
+<path class="text-primary-container" d="M0 16 L25 11 L50 4 L75 18 L100 20 L120 17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<!-- Key Point -->
+<circle class="fill-primary-container" cx="50" cy="4" r="3"></circle>
+</svg>
+</div>
+</div>
+</div>
+<!-- MATCH CARD 2: 2nd Place Runner-Up -->
+<div class="relative bg-surface-container-low rounded-xl p-space-md md:p-space-lg shadow-xl overflow-hidden group">
+<!-- Silver Accent Edge -->
+<div class="absolute top-0 left-0 bottom-0 w-1 bg-secondary"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-space-md mb-space-md">
+<!-- Left Info & Podium Result -->
+<div class="flex flex-col sm:flex-row sm:items-center gap-space-md">
+<div class="flex items-center justify-center w-12 h-12 rounded-lg bg-surface-container text-secondary">
+<span class="font-headline-md text-headline-md font-bold">2nd</span>
+</div>
+<div class="flex flex-col">
+<div class="flex items-center gap-space-xs flex-wrap">
+<span class="font-headline-sm text-headline-sm text-primary font-bold">2×2×2 Arena Duel #CA-7102</span>
+<span class="bg-surface-container text-secondary font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded">Ranked Duel</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">3 hours ago</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Host: CubeArena UK-London Node • 2 Competitors</span>
+</div>
+</div>
+<!-- Match Metric Totals -->
+<div class="flex items-center gap-space-lg">
+<div class="flex flex-col items-end">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Ao5 Result</span>
+<span class="font-scramble-sm text-scramble-sm text-secondary font-bold">5.12 s</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Best Single</span>
+<span class="font-scramble-sm text-scramble-sm text-primary-container font-bold">4.21 s</span>
+</div>
+<div class="flex flex-col items-end">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Rating Delta</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold">+12 MMR</span>
+</div>
+</div>
+</div>
+<!-- Mid: Scrambles & 5-Solve Progression -->
+<div class="bg-surface-container rounded-lg p-space-sm mb-space-md">
+<div class="flex items-center justify-between mb-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">Solve Progression &amp; TNoodle Scrambles</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary">Match Ao5</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-5 gap-space-xs">
+<div class="bg-surface-container-high p-2 rounded flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">S1</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">5.40</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">R U R' U R U2 R'</span>
+</div>
+<div class="bg-surface-container-high p-2 rounded flex flex-col border border-primary-container/20">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-primary-container font-semibold">S2 (PB)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary-container font-bold">4.21</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">U R' F U2 R F' U</span>
+</div>
+<div class="bg-surface-container-high p-2 rounded flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">S3</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">5.20</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">R' F2 R F' U2 R' U</span>
+</div>
+<div class="bg-surface-container-high p-2 rounded flex flex-col">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">S4</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">4.75</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">U2 R F' R2 U' R F2</span>
+</div>
+<div class="bg-surface-container-high p-2 rounded flex flex-col opacity-75">
+<div class="flex justify-between items-center mb-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant line-through">S5 (slow)</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant line-through">6.12</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant truncate">F R U' R2 F' R U2</span>
+</div>
+</div>
+</div>
+<!-- Bottom: Opponents & Sparkline -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm pt-space-xs">
+<div class="flex items-center gap-space-md">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Opponent:</span>
+<div class="flex items-center gap-1.5 bg-surface-container px-2 py-1 rounded">
+<span class="font-label-mono-xs text-label-mono-xs text-primary-container">1st</span>
+<span class="font-body-sm text-body-sm text-on-surface">@hyper_turner</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-container">(4.98s Ao5)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Pace Dispersion:</span>
+<svg class="w-32 h-6" fill="none" viewBox="0 0 120 24">
+<path d="M0 18 L30 15 L60 6 L90 14 L120 22 L120 24 L0 24 Z" fill="rgba(0, 227, 253, 0.15)"></path>
+<path class="text-secondary-container" d="M0 18 L30 15 L60 6 L90 14 L120 22" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+<circle class="fill-secondary-container" cx="60" cy="6" r="3"></circle>
+</svg>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB PANEL 2: SOLVE HISTORY & BREAKDOWNS (Initially Hidden) -->
+<div class="hidden flex-col gap-space-md" id="panel-breakdowns">
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-xl flex flex-col md:flex-row items-center justify-between gap-space-lg">
+<div class="flex flex-col gap-space-xs max-w-md">
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">CFOP Phase Breakdown &amp; Reconstruction</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">
+              Telemetry averages sampled over 148 verified arena solves for 3x3x3. Cross and F2L transitions show standard sub-8 pacing.
+            </p>
+</div>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-space-md w-full md:w-auto">
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">CROSS</span>
+<span class="font-scramble-sm text-scramble-sm text-primary-container font-bold">1.45 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">10.8% of solve</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">F2L (4 PAIRS)</span>
+<span class="font-scramble-sm text-scramble-sm text-secondary font-bold">6.92 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">51.3% of solve</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">OLL</span>
+<span class="font-scramble-sm text-scramble-sm text-primary-fixed-dim font-bold">2.14 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">15.9% of solve</span>
+</div>
+<div class="bg-surface-container p-space-sm rounded flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">PLL</span>
+<span class="font-scramble-sm text-scramble-sm text-secondary-container font-bold">2.98 s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">22.0% of solve</span>
+</div>
+</div>
+</div>
+</div>
+<!-- TAB PANEL 3: HEAD-TO-HEAD RECORDS (Initially Hidden) -->
+<div class="hidden flex-col gap-space-md" id="panel-h2h">
+<div class="bg-surface-container-low rounded-xl p-space-lg shadow-xl">
+<div class="flex items-center justify-between mb-space-md">
+<h3 class="font-headline-sm text-headline-sm text-primary font-bold">Frequent Competitor Rivalries</h3>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Live Ranked Ladder</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-space-md">
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-bold text-on-surface">@feliks_fan</span>
+<span class="bg-primary-container/20 text-primary-container font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded font-bold">5 - 2 (71% WR)</span>
+</div>
+<p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mt-space-sm">Last met in Grand Championship #CA-8920 (Won)</p>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-bold text-on-surface">@hyper_turner</span>
+<span class="bg-surface-container-highest text-secondary font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded font-bold">3 - 4 (43% WR)</span>
+</div>
+<p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mt-space-sm">Last met in Arena Duel #CA-7102 (Lost)</p>
+</div>
+<div class="bg-surface-container p-space-md rounded-lg flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="font-body-md text-body-md font-bold text-on-surface">@matsu_cubes</span>
+<span class="bg-primary-container/20 text-primary-container font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded font-bold">4 - 1 (80% WR)</span>
+</div>
+<p class="font-label-mono-xs text-label-mono-xs text-on-surface-variant mt-space-sm">Last met in Pyraminx Sprint #CA-6310 (Won)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Inline Tab Switcher Microinteraction -->
+<script>
+    function switchProfileTab(tabName) {
+      const tabs = ['history', 'breakdowns', 'h2h'];
+      tabs.forEach(t => {
+        const panel = document.getElementById('panel-' + t);
+        const btn = document.getElementById('tab-btn-' + t);
+        if (t === tabName) {
+          panel.classList.remove('hidden');
+          panel.classList.add('flex');
+          btn.classList.add('bg-surface-container', 'text-primary');
+          btn.classList.remove('text-on-surface-variant');
+        } else {
+          panel.classList.add('hidden');
+          panel.classList.remove('flex');
+          btn.classList.remove('bg-surface-container', 'text-primary');
+          btn.classList.add('text-on-surface-variant');
+        }
+      });
+    }
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest py-space-md mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.5)]"><div class="w-full px-gutter-desktop flex flex-col md:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-md font-label-mono-xs text-label-mono-xs text-on-surface-variant"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="text-on-surface">1,429 Online</span></div><span class="text-surface-bright">|</span><span class="">v1.0.4-beta</span><span class="text-surface-bright">|</span><span class="text-secondary">All Nodes Operational</span></div><div class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-right"><p class="">WCA-compliant scramble generator notation (TNoodle spec). Unofficial community arena.</p></div></div></footer>
+
+</body></html>

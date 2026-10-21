@@ -1,0 +1,567 @@
+<!DOCTYPE html><html class="dark" lang="en" data-lt-installed="true"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Cube Arena - Competitive Multiplayer Speedcubing</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-tertiary-fixed":"#400011","tertiary-fixed-dim":"#ffb2ba","on-secondary":"#00363d","surface-container":"#1c2025","on-secondary-fixed":"#001f24","surface-bright":"#36393f","on-secondary-container":"#00616d","secondary-container":"#00e3fd","tertiary-container":"#ffd4d7","on-tertiary-fixed-variant":"#910030","secondary":"#bdf4ff","inverse-surface":"#e0e2ea","surface-container-highest":"#31353b","on-tertiary-container":"#c40044","primary-fixed-dim":"#00e478","surface-container-lowest":"#0a0e14","primary-container":"#00ff87","outline-variant":"#3b4b3d","on-error":"#690005","secondary-fixed-dim":"#00daf3","secondary-fixed":"#9cf0ff","inverse-primary":"#006d36","surface-container-low":"#181c21","tertiary":"#fffaf9","outline":"#849585","on-surface-variant":"#b9cbb9","on-primary-fixed-variant":"#005227","on-tertiary":"#670020","on-primary-container":"#007138","surface-dim":"#101419","on-primary-fixed":"#00210c","on-error-container":"#ffdad6","primary":"#f1ffef","inverse-on-surface":"#2d3136","surface-tint":"#00e478","on-secondary-fixed-variant":"#004f58","surface-container-high":"#262a30","on-primary":"#003919","primary-fixed":"#60ff98","on-background":"#e0e2ea","error-container":"#93000a","on-surface":"#e0e2ea","surface":"#101419","background":"#101419","tertiary-fixed":"#ffd9dc","surface-variant":"#31353b","error":"#ffb4ab"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-sm":"0.5rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","gutter":"1rem","space-xs":"0.25rem","space-xl":"2.5rem","margin-desktop":"2.5rem","space-md":"1rem","margin":"1rem"},fontFamily:{"label-mono-sm":["JetBrains Mono"],"scramble-lg":["JetBrains Mono"],"display-timer":["JetBrains Mono"],"headline-md":["Space Grotesk"],"body-lg":["Geist"],"headline-lg-mobile":["Space Grotesk"],"display-timer-mobile":["JetBrains Mono"],"headline-lg":["Space Grotesk"],"scramble-sm":["JetBrains Mono"],"body-sm":["Geist"],"label-mono-xs":["JetBrains Mono"],"headline-sm":["Space Grotesk"],"body-md":["Geist"]},fontSize:{"label-mono-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}],"scramble-lg":["24px",{"lineHeight":"36px","letterSpacing":"0.08em","fontWeight":"500"}],"display-timer":["96px",{"lineHeight":"96px","letterSpacing":"-0.04em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-timer-mobile":["56px",{"lineHeight":"56px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"scramble-sm":["16px",{"lineHeight":"24px","letterSpacing":"0.06em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-mono-xs":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.6)]"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm cursor-pointer"><img alt="Cube Arena Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VQhT8H494EXPxX3NWhb9xaTsVMXIxqEiyhZM7sAQo3PUdu5bvoVCCXf_pxFSlfnuf6sGJNZM12VxRzH64DJaxr-wH-juVScA9Enr8HAtnzCDmQLUTcUwDhKwMAJ4jXGF1gj1_CYQSoYiPsGu31qjvyXhV8CubEKB7udG1bvcKl56QVEkStmxvmTkQsLge18199E1wnIOTpjn9dVo3v3g3Fwv_3nJd9eGWgPsO5gMDWrGHoGyy2t0j1cQ0"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-primary">CUBE ARENA</span><div class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse"></span></div></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-bold"><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="home" href="#">Home</a><a aria-current="page" class="px-space-md py-space-xs transition-all bg-surface-container-high text-primary font-bold" data-path="multiplayer-rooms" href="#">Multiplayer Rooms</a><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="global-rankings" href="#">Global Rankings</a><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="profile" href="#">Profile</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-1.5 bg-surface-container px-space-sm py-1"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed">14ms Frankfurt</span></div><button class="flex items-center gap-1.5 bg-surface-container px-space-md py-space-xs font-label-mono-sm text-label-mono-sm text-primary-container hover:bg-primary-container hover:text-on-primary-container transition-all" type="button"><span class="material-symbols-outlined text-sm leading-none">add</span><span class="">New Room</span></button><div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-1"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Mr2ho7p06z6u2Y8tFAxL2rr1fM9oZi1kFLoQ6kaA5o7DPhLBiiGgYy8tiFbQQ4P0iqn01NR_iKsHc3nzjAmzmad4dpCGQtMz3Ccp_XAshZi-QtEMSO_DbCktARfrsko2V7aPs3hFqye2sJIK_4ta3MQmJ8Sm-NkeHOaeXZyB3x718dJELPL_xNKPzvNfbqtqtGj6IdSRRYJRCaJZdQ0WF4kmz-Iib2QpHpAFFBNK06w-6IXRr9yi"><div class="hidden sm:flex flex-col text-left"><div class="flex items-center gap-1.5"><span class="font-body-sm text-body-sm font-semibold text-on-surface">Shine</span><span class="bg-surface-container-highest px-1 font-label-mono-xs text-label-mono-xs text-secondary">#128 Global 3x3</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">@shine_cubes</span></div><button aria-label="Settings" class="text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg leading-none">settings</span></button></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- ROOM TELEMETRY BANNER -->
+<div class="w-full bg-surface-container-lowest px-gutter-desktop py-space-sm flex flex-wrap items-center justify-between gap-space-sm shadow-md">
+<!-- Left telemetry grouping -->
+<div class="flex flex-wrap items-center gap-space-md">
+<div class="flex items-center gap-space-xs bg-surface-container-high px-space-sm py-1 rounded">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase tracking-wider">ROOM</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary font-bold">#CA-8924</span>
+<button class="text-secondary hover:text-primary transition-colors flex items-center" id="copyRoomBtn" title="Copy Room Code" type="button">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="bg-surface-container px-2 py-0.5 font-label-mono-xs text-label-mono-xs text-primary-fixed-dim rounded">3x3x3 CUBE</span>
+<span class="bg-surface-container px-2 py-0.5 font-label-mono-xs text-label-mono-xs text-secondary rounded">FORMAT: Ao5</span>
+<span class="bg-surface-container-high px-2 py-0.5 font-label-mono-xs text-label-mono-xs text-primary font-bold rounded">ROUND 3 OF 5</span>
+</div>
+<div class="hidden lg:flex items-center gap-1.5 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="">HOST</span>
+<span class="text-primary font-semibold">@Shine</span>
+</div>
+</div>
+<!-- Right match status -->
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-2 bg-surface-container-low px-space-sm py-1 rounded">
+<span class="relative flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-fixed-dim opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-primary-fixed-dim"></span>
+</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-container font-semibold uppercase tracking-wider">READY FOR ROUND 3</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">(6/6 SYNCED)</span>
+</div>
+<div class="flex items-center gap-1 font-label-mono-xs text-label-mono-xs text-secondary">
+<span class="material-symbols-outlined text-xs">network_ping</span>
+<span class="">18ms</span>
+</div>
+<button class="flex items-center gap-1 bg-surface-container hover:bg-error-container hover:text-on-error-container px-2 py-1 text-on-surface-variant rounded transition-all" type="button">
+<span class="material-symbols-outlined text-sm">logout</span>
+<span class="font-label-mono-xs text-label-mono-xs">Leave</span>
+</button>
+</div>
+</div>
+<!-- MAIN BATTLE ARENA GRID (3 Zones: Scramble & Timer | Leaderboard | Telemetry Feed) -->
+<div class="w-full px-gutter-desktop py-space-md flex flex-col xl:flex-row gap-space-md">
+<!-- LEFT & CENTER DUAL VIEW (TIMER & SCRAMBLE) - 8 Cols desktop equivalent -->
+<div class="flex-1 flex flex-col gap-space-md">
+<!-- SCRAMBLE MATRIX & 2D NET SCHEMATIC -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-md shadow-md relative overflow-hidden">
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-space-sm mb-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-label-mono-xs text-label-mono-xs uppercase text-on-surface-variant tracking-wider">OFFICIAL WCA TNoodle SCRAMBLE #3</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">INSPECTION RULE:</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed bg-surface-container-high px-2 py-0.5 rounded">WCA 15s OPTIONAL</span>
+</div>
+</div>
+<div class="flex flex-col lg:flex-row items-center gap-space-md">
+<!-- Scramble String Breakdown with Turn Signatures -->
+<div class="flex-1 bg-surface-container-lowest p-space-md rounded-lg font-scramble-sm text-scramble-sm text-primary tracking-widest break-words leading-relaxed select-all">
+<span class="text-secondary font-bold">R2</span>
+<span class="text-tertiary-fixed-dim">U'</span>
+<span class="text-secondary font-bold">F2</span>
+<span class="text-tertiary-fixed-dim">D'</span>
+<span class="text-secondary font-bold">B2</span>
+<span class="text-secondary font-bold">L2</span>
+<span class="text-primary font-medium">D</span>
+<span class="text-secondary font-bold">F2</span>
+<span class="text-secondary font-bold">R2</span>
+<span class="text-tertiary-fixed-dim">U'</span>
+<span class="text-secondary font-bold">B2</span>
+<span class="text-tertiary-fixed-dim">L'</span>
+<span class="text-tertiary-fixed-dim">B'</span>
+<span class="text-tertiary-fixed-dim">D'</span>
+<span class="text-tertiary-fixed-dim">R'</span>
+<span class="text-primary font-medium">F</span>
+<span class="text-secondary font-bold">U2</span>
+<span class="text-primary font-medium">R</span>
+<span class="text-tertiary-fixed-dim">F'</span>
+<span class="text-tertiary-fixed-dim">D'</span>
+<span class="text-secondary font-bold">R2</span>
+</div>
+<!-- Unfolded 2D Cube State Isometric/Orthographic Preview Map -->
+<div class="flex-shrink-0 flex flex-col items-center justify-center p-2 bg-surface-container-lowest rounded-lg">
+<div class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase mb-1">State Map</div>
+<!-- Minimal SVG Unfolded Net representation (TNoodle projection) -->
+<svg class="w-32 h-24" fill="none" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg">
+<!-- Up Face (White / tinted primary) at (30, 0) -->
+<g transform="translate(30, 0)">
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="0" y="0"></rect>
+<rect fill="#ffd4d7" height="8" rx="0.5" width="8" x="10" y="0"></rect>
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="20" y="0"></rect>
+<rect fill="#00daf3" height="8" rx="0.5" width="8" x="0" y="10"></rect>
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="10" y="10"></rect>
+<rect fill="#ffb4ab" height="8" rx="0.5" width="8" x="20" y="10"></rect>
+<rect fill="#ffd9dc" height="8" rx="0.5" width="8" x="0" y="20"></rect>
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="10" y="20"></rect>
+<rect fill="#00e3fd" height="8" rx="0.5" width="8" x="20" y="20"></rect>
+</g>
+<!-- Left Face (Orange) at (0, 30) -->
+<g transform="translate(0, 30)">
+<rect fill="#ffb4ab" height="8" rx="0.5" width="8" x="0" y="0"></rect>
+<rect fill="#ffdad6" height="8" rx="0.5" width="8" x="10" y="0"></rect>
+<rect fill="#00daf3" height="8" rx="0.5" width="8" x="20" y="0"></rect>
+<rect fill="#ffd4d7" height="8" rx="0.5" width="8" x="0" y="10"></rect>
+<rect fill="#ffdad6" height="8" rx="0.5" width="8" x="10" y="10"></rect>
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="20" y="10"></rect>
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="0" y="20"></rect>
+<rect fill="#ffd4d7" height="8" rx="0.5" width="8" x="10" y="20"></rect>
+<rect fill="#ffb2ba" height="8" rx="0.5" width="8" x="20" y="20"></rect>
+</g>
+<!-- Front Face (Green) at (30, 30) -->
+<g transform="translate(30, 30)">
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="0" y="0"></rect>
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="10" y="0"></rect>
+<rect fill="#ffd9dc" height="8" rx="0.5" width="8" x="20" y="0"></rect>
+<rect fill="#00daf3" height="8" rx="0.5" width="8" x="0" y="10"></rect>
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="10" y="10"></rect>
+<rect fill="#ffdad6" height="8" rx="0.5" width="8" x="20" y="10"></rect>
+<rect fill="#ffb4ab" height="8" rx="0.5" width="8" x="0" y="20"></rect>
+<rect fill="#00e3fd" height="8" rx="0.5" width="8" x="10" y="20"></rect>
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="20" y="20"></rect>
+</g>
+<!-- Right Face (Red) at (60, 30) -->
+<g transform="translate(60, 30)">
+<rect fill="#ffd4d7" height="8" rx="0.5" width="8" x="0" y="0"></rect>
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="10" y="0"></rect>
+<rect fill="#ffb2ba" height="8" rx="0.5" width="8" x="20" y="0"></rect>
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="0" y="10"></rect>
+<rect fill="#ffd4d7" height="8" rx="0.5" width="8" x="10" y="10"></rect>
+<rect fill="#00daf3" height="8" rx="0.5" width="8" x="20" y="10"></rect>
+<rect fill="#00e3fd" height="8" rx="0.5" width="8" x="0" y="20"></rect>
+<rect fill="#ffb4ab" height="8" rx="0.5" width="8" x="10" y="20"></rect>
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="20" y="20"></rect>
+</g>
+<!-- Back Face (Blue) at (90, 30) -->
+<g transform="translate(90, 30)">
+<rect fill="#00daf3" height="8" rx="0.5" width="8" x="0" y="0"></rect>
+<rect fill="#ffb4ab" height="8" rx="0.5" width="8" x="10" y="0"></rect>
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="20" y="0"></rect>
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="0" y="10"></rect>
+<rect fill="#00daf3" height="8" rx="0.5" width="8" x="10" y="10"></rect>
+<rect fill="#ffd9dc" height="8" rx="0.5" width="8" x="20" y="10"></rect>
+<rect fill="#ffd4d7" height="8" rx="0.5" width="8" x="0" y="20"></rect>
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="10" y="20"></rect>
+<rect fill="#ffdad6" height="8" rx="0.5" width="8" x="20" y="20"></rect>
+</g>
+<!-- Down Face (Yellow) at (30, 60) -->
+<g transform="translate(30, 60)">
+<rect fill="#00e3fd" height="8" rx="0.5" width="8" x="0" y="0"></rect>
+<rect fill="#ffd9dc" height="8" rx="0.5" width="8" x="10" y="0"></rect>
+<rect fill="#00daf3" height="8" rx="0.5" width="8" x="20" y="0"></rect>
+<rect fill="#ffb4ab" height="8" rx="0.5" width="8" x="0" y="10"></rect>
+<rect fill="#00e3fd" height="8" rx="0.5" width="8" x="10" y="10"></rect>
+<rect fill="#f1ffef" height="8" rx="0.5" width="8" x="20" y="10"></rect>
+<rect fill="#00ff87" height="8" rx="0.5" width="8" x="0" y="20"></rect>
+<rect fill="#ffd4d7" height="8" rx="0.5" width="8" x="10" y="20"></rect>
+<rect fill="#ffb2ba" height="8" rx="0.5" width="8" x="20" y="20"></rect>
+</g>
+</svg>
+</div>
+</div>
+</div>
+<!-- ESPORTS HIGH-PRECISION DIGITAL TIMER ARENA -->
+<div class="w-full flex-1 bg-surface-container-low rounded-xl p-space-lg flex flex-col items-center justify-center relative min-h-[380px] shadow-lg select-none transition-all duration-150" id="timerContainer">
+<!-- Ambient Status Light & Ready Pill -->
+<div class="absolute top-4 left-6 flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container shadow-[0_0_8px_#00ff87]"></span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary font-bold uppercase tracking-widest" id="timerStatusLabel">ROUND 3 RECORDED (CONFIRMED)</span>
+</div>
+<div class="absolute top-4 right-6 flex items-center gap-2">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">INSPECTION CLOCK</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary-fixed bg-surface-container-highest px-2 py-0.5 rounded font-bold" id="inspectionTimer">15.0s</span>
+</div>
+<!-- Huge Main Digital Counter -->
+<div class="flex flex-col items-center justify-center my-auto py-6">
+<div class="flex items-baseline font-display-timer text-display-timer text-primary font-bold tracking-tighter">
+<span id="timerMain" class="">13</span>
+<span class="text-primary-container">.</span>
+<span class="text-[58px] leading-none text-secondary" id="timerSub">42</span>
+</div>
+<div class="mt-4 flex items-center gap-2 px-space-md py-1.5 bg-surface-container-highest rounded-full shadow-inner" id="pressInstruction">
+<span class="material-symbols-outlined text-sm text-primary-fixed-dim">space_bar</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface uppercase tracking-wider font-semibold">SPACEBAR TO HOLD / RELEASE TO SOLVE</span>
+</div>
+</div>
+<!-- Timer Controls, Penalties, & Re-Arm Button bar -->
+<div class="w-full pt-space-md border-t-0 flex flex-wrap items-center justify-between gap-space-sm bg-surface-container-lowest/40 px-space-md py-2 rounded-lg">
+<div class="flex items-center gap-space-xs">
+<button class="px-space-md py-1 bg-surface-container hover:bg-surface-container-highest text-on-surface font-label-mono-sm text-label-mono-sm rounded transition-all" id="btnPlusTwo" type="button">
+              +2 SEC
+            </button>
+<button class="px-space-md py-1 bg-surface-container hover:bg-error-container hover:text-on-error-container text-error font-label-mono-sm text-label-mono-sm rounded transition-all" id="btnDnf" type="button">
+              DNF
+            </button>
+<button class="px-space-sm py-1 bg-surface-container hover:bg-surface-container-high text-on-surface-variant font-label-mono-sm text-label-mono-sm rounded transition-all flex items-center gap-1" id="btnReset" type="button">
+<span class="material-symbols-outlined text-sm">refresh</span>
+<span class="">Reset</span>
+</button>
+</div>
+<!-- Solver Telemetry Micro-Pill -->
+<div class="flex items-center gap-space-md font-label-mono-xs text-label-mono-xs">
+<div class="flex items-center gap-1">
+<span class="text-on-surface-variant">TPS:</span>
+<span class="text-primary font-bold">5.89</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-on-surface-variant">TURNS:</span>
+<span class="text-primary font-bold">79</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="text-on-surface-variant">SPLIT LEAP:</span>
+<span class="text-primary-fixed-dim font-bold">-0.48s</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- RIGHT EXPANDED LEADERBOARD & LIVE TELEMETRY FEED (4 Cols equivalent) -->
+<div class="w-full xl:w-[460px] flex flex-col gap-space-md">
+<!-- LIVE STANDINGS MATRIX (6 PLAYERS) -->
+<div class="w-full bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col">
+<div class="flex items-center justify-between mb-space-sm pb-1 border-0">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim text-lg">leaderboard</span>
+<span class="font-headline-sm text-headline-sm text-primary uppercase tracking-wide">LIVE ROUND STANDINGS</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed bg-surface-container px-2 py-0.5 rounded">Ao5 SORT</span>
+</div>
+<!-- COMPETITOR ROWS -->
+<div class="flex flex-col gap-1.5">
+<!-- 1. Shine (You) -->
+<div class="bg-surface-container-high p-space-sm rounded-lg flex flex-col gap-1 shadow-sm relative overflow-hidden">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary-container"></div>
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-primary-container font-bold w-4">#1</span>
+<img class="w-6 h-6 rounded-full object-cover" data-alt="Close up competitive esports speedcuber portrait focused with neon emerald lighting reflection on glasses inside a tournament booth." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6rMmYh0De8g3GuZkP62wyKVQ29pw1QQ5qjcHdGOFWVzae9LkTU32HxXlxKHZh4KaKxyWFKzrAp8-MumlsSqh1qQ_t3Wrjwzboro7nrQmJvMIN_TLGUzehn-CnJLI79CfgqI8bvi4YVYDP2LIHTcr7lOIcpfv65xIPV48uLtQ5rFOI0YMKaNvfeGPkW4kvdoriKQoMh3SO-siz7F4wkHNc9tL9bXamVfJtVprTGzSFRoUPG_3Kp28-">
+<div class="flex items-center gap-1.5">
+<span class="font-body-md text-body-md font-bold text-primary">Shine</span>
+<span class="bg-primary-container text-on-primary-container font-label-mono-xs text-label-mono-xs px-1 rounded font-bold">YOU</span>
+</div>
+</div>
+<div class="text-right flex items-baseline gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Ao5:</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary-fixed-dim font-bold">13.39s</span>
+</div>
+</div>
+<!-- Individual 5 Solves Matrix -->
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-lowest/60 px-2 py-1 rounded">
+<span class="">S1: <span class="text-on-surface">12.84</span></span>
+<span class="">S2: <span class="text-on-surface">13.90</span></span>
+<span class="text-primary-container font-bold">S3: 13.42</span>
+<span class="text-outline-variant">S4: —</span>
+<span class="text-outline-variant">S5: —</span>
+</div>
+</div>
+<!-- 2. FastCube -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-secondary font-bold w-4">#2</span>
+<img class="w-6 h-6 rounded-full object-cover" data-alt="Side profile speedcubing gamer with glowing cyan headset holding a puzzle cube under dark arena lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAeeQrUULEcaKwbl8fqgzXqe_40mQkfBopVM6JMmmxmnhVwyRcN5ODycANb3pJT5YMcnCnwB-gqKTOyQQi3l1xL6De_TEGqbnQvYlTL6NRe2CjnUl2GpctQJ1v30sSpukDK-udlOKdZX1Yn4qTGqVVOnBAru-OjV-4RV5OeOWVTuQ6y9em4rESt4ZFmaEt1SFbAQ9dy4fen5OKqrHFZoJck4DhmlDzwg7ZsJJShLcOezf53_8HCsIfo">
+<span class="font-body-md text-body-md font-medium text-on-surface">FastCube</span>
+</div>
+<div class="text-right flex items-center gap-2">
+<span class="inline-flex items-center gap-1 font-label-mono-xs text-label-mono-xs text-secondary-fixed animate-pulse">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary-fixed"></span> Solving 08.41s
+                </span>
+</div>
+</div>
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-lowest/40 px-2 py-1 rounded">
+<span class="">S1: <span class="text-on-surface">13.10</span></span>
+<span class="">S2: <span class="text-on-surface">14.05</span></span>
+<span class="text-secondary font-semibold">S3: ...</span>
+<span class="text-outline-variant">S4: —</span>
+<span class="text-outline-variant">S5: —</span>
+</div>
+</div>
+<!-- 3. SpeedyAlex -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-bold w-4">#3</span>
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center font-label-mono-xs text-on-surface">SA</div>
+<span class="font-body-md text-body-md font-medium text-on-surface">SpeedyAlex</span>
+</div>
+<div class="text-right flex items-baseline gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Ao5:</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">14.41s</span>
+</div>
+</div>
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-lowest/40 px-2 py-1 rounded">
+<span class="">S1: <span class="text-on-surface">14.22</span></span>
+<span class="">S2: <span class="text-on-surface">13.88</span></span>
+<span class="text-error font-semibold">S3: +2 (15.12)</span>
+<span class="text-outline-variant">S4: —</span>
+<span class="text-outline-variant">S5: —</span>
+</div>
+</div>
+<!-- 4. CubeMaster -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-bold w-4">#4</span>
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center font-label-mono-xs text-on-surface">CM</div>
+<span class="font-body-md text-body-md font-medium text-on-surface">CubeMaster</span>
+</div>
+<div class="text-right flex items-baseline gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Best:</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">12.99s</span>
+</div>
+</div>
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-lowest/40 px-2 py-1 rounded">
+<span class="">S1: <span class="text-error font-bold">DNF</span></span>
+<span class="">S2: <span class="text-primary-fixed-dim">12.99</span></span>
+<span class="">S3: <span class="text-on-surface">13.45</span></span>
+<span class="text-outline-variant">S4: —</span>
+<span class="text-outline-variant">S5: —</span>
+</div>
+</div>
+<!-- 5. ValkRacer -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-bold w-4">#5</span>
+<img class="w-6 h-6 rounded-full object-cover" data-alt="Professional esports player in dark jersey solving speedcube in championship stage lights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAIM5U3wvYOYqLmrK0hcE0FZzsWjCHXLD-xtM3HOwXkrK_-x7OS1H1CTwPuWHBZ8uyCFlJ1OOHaRB3mKHYfBOiqhxNDxDyCcbjPK0wVgiYtHTP_jxp8JRn9iKJOUJyizWTa_zMZEBK570KnC2K6CQ3xZmbxb1QO_oEacPsE6PNpCP3TyCH4ycVCZ8dTt5uKiPeoqfXWxphXBJUkkDOkNCOVPAMH2kOHwIxnx5NzjBu1EHoaJmNahGYb">
+<span class="font-body-md text-body-md font-medium text-on-surface">ValkRacer</span>
+</div>
+<div class="text-right flex items-center gap-1 font-label-mono-xs text-label-mono-xs text-secondary-fixed animate-pulse">
+<span class="">Solving...</span>
+</div>
+</div>
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-lowest/40 px-2 py-1 rounded">
+<span class="">S1: <span class="text-on-surface">15.60</span></span>
+<span class="">S2: <span class="text-on-surface">14.80</span></span>
+<span class="text-secondary">S3: ...</span>
+<span class="text-outline-variant">S4: —</span>
+<span class="text-outline-variant">S5: —</span>
+</div>
+</div>
+<!-- 6. NeoSolver -->
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1 hover:bg-surface-container-high transition-colors">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant font-bold w-4">#6</span>
+<div class="w-6 h-6 rounded-full bg-surface-bright flex items-center justify-center font-label-mono-xs text-on-surface">NS</div>
+<span class="font-body-md text-body-md font-medium text-on-surface">NeoSolver</span>
+</div>
+<div class="text-right flex items-baseline gap-1">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Ao5:</span>
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface">15.71s</span>
+</div>
+</div>
+<div class="flex items-center justify-between font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container-lowest/40 px-2 py-1 rounded">
+<span class="">S1: <span class="text-on-surface">16.20</span></span>
+<span class="">S2: <span class="text-on-surface">15.90</span></span>
+<span class="">S3: <span class="text-on-surface">15.02</span></span>
+<span class="text-outline-variant">S4: —</span>
+<span class="text-outline-variant">S5: —</span>
+</div>
+</div>
+</div>
+</div>
+<!-- LIVE TOURNAMENT LOG & CHAT BOX -->
+<div class="w-full flex-1 bg-surface-container-low rounded-xl p-space-md shadow-md flex flex-col justify-between min-h-[220px]">
+<div>
+<div class="flex items-center justify-between mb-space-xs pb-1">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-sm">chat_bubble_outline</span>
+<span class="font-label-mono-xs text-label-mono-xs uppercase text-on-surface font-semibold tracking-wider">ROOM LOG &amp; LIVE FEED</span>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+</div>
+<!-- Feed lines -->
+<div class="flex flex-col gap-1.5 font-label-mono-xs text-label-mono-xs max-h-40 overflow-y-auto pr-1">
+<div class="text-on-surface-variant">
+<span class="text-outline font-semibold">14:02:11</span> FastCube locked Round 2 with <span class="text-primary font-bold">14.05s</span>
+</div>
+<div class="text-on-surface-variant">
+<span class="text-outline font-semibold">14:02:30</span> SpeedyAlex received +2 penalty (13.12 -&gt; 15.12s)
+            </div>
+<div class="p-1 rounded bg-primary-container/10 text-primary-fixed">
+<span class="text-primary-container font-bold">⚡ RECORD:</span> Shine set current match lead with <span class="font-bold underline">12.84s single</span>!
+            </div>
+<div class="text-on-surface-variant">
+<span class="text-outline font-semibold">14:03:02</span> Shine recorded <span class="text-primary font-bold">13.42s</span> in Round 3
+            </div>
+</div>
+</div>
+<!-- Chat input bar -->
+<div class="mt-space-sm pt-space-xs flex items-center gap-space-xs">
+<input class="flex-1 bg-surface-container-lowest px- space-sm py-1.5 rounded text-on-surface placeholder:text-on-surface-variant/50 font-body-sm text-body-sm focus:outline-none focus:ring-1 focus:ring-primary-container" placeholder="Send GG or quick message..." type="text">
+<button class="bg-surface-container px-2 py-1.5 text-secondary hover:text-primary rounded transition-colors flex items-center" type="button">
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- ARENA BOTTOM ADVANCEMENT STRIP -->
+<div class="w-full bg-surface-container-lowest px-gutter-desktop py-space-sm flex flex-wrap items-center justify-between gap-space-sm shadow-md mt-auto">
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-2">
+<span class="font-label-mono-sm text-label-mono-sm text-on-surface-variant">ROUND 3 PROGRESS:</span>
+<div class="w-32 bg-surface-container-highest rounded-full h-2 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-300" style="width: 66%;"></div>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-primary font-bold">4/6 Finished</span>
+</div>
+<div class="hidden md:flex items-center gap-2 pl-space-md">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Leader Delta: <span class="text-primary-fixed-dim font-bold">-0.66s ahead of FastCube</span></span>
+</div>
+</div>
+<!-- Auto advance countdown -->
+<div class="flex items-center gap-space-md">
+<div class="flex items-center gap-2 bg-surface-container px-space-md py-1 rounded">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">AUTO ADVANCE ROUND 4 IN</span>
+<span class="font-label-mono-sm text-label-mono-sm text-secondary-container font-bold" id="advanceCountdown">LAUNCHING</span>
+</div>
+<button class="bg-primary-container hover:bg-primary text-on-primary-container font-label-mono-sm text-label-mono-sm px-space-md py-1.5 rounded font-bold transition-all shadow-[0_0_12px_rgba(0,255,135,0.2)]" id="forceNextBtn" type="button">
+        Start Round 4 Now
+      </button>
+</div>
+</div>
+<!-- INTERACTIVE TIMER & LIVE ADVANCE SCRIPT -->
+<script>
+    (function initCubeArena() {
+      // Elements
+      const timerMain = document.getElementById('timerMain');
+      const timerSub = document.getElementById('timerSub');
+      const timerContainer = document.getElementById('timerContainer');
+      const timerStatusLabel = document.getElementById('timerStatusLabel');
+      const pressInstruction = document.getElementById('pressInstruction');
+      const btnPlusTwo = document.getElementById('btnPlusTwo');
+      const btnDnf = document.getElementById('btnDnf');
+      const btnReset = document.getElementById('btnReset');
+      const advanceCountdown = document.getElementById('advanceCountdown');
+      const copyBtn = document.getElementById('copyRoomBtn');
+
+      let timerInterval = null;
+      let startTime = null;
+      let state = 'IDLE'; // IDLE, ARMED, RUNNING, STOPPED
+      let holdTimeout = null;
+      let advanceSeconds = 8;
+
+      // Copy room code
+      if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+          navigator.clipboard?.writeText('#CA-8924');
+          copyBtn.classList.add('text-primary-fixed-dim');
+          setTimeout(() => copyBtn.classList.remove('text-primary-fixed-dim'), 1000);
+        });
+      }
+
+      // Format seconds & millis
+      function updateDisplay(ms) {
+        const totalSec = Math.floor(ms / 1000);
+        const subSec = Math.floor((ms % 1000) / 10);
+        const subFormatted = subSec < 10 ? '0' + subSec : '' + subSec;
+        timerMain.textContent = totalSec < 10 ? '0' + totalSec : totalSec;
+        timerSub.textContent = subFormatted;
+      }
+
+      // Spacebar controls
+      window.addEventListener('keydown', (e) => {
+        if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+          e.preventDefault();
+          if (state === 'IDLE' || state === 'STOPPED') {
+            state = 'ARMING';
+            timerContainer.classList.add('bg-tertiary-container/10');
+            timerStatusLabel.textContent = 'HOLD SPACEBAR...';
+            timerStatusLabel.className = 'font-label-mono-xs text-label-mono-xs text-tertiary-fixed-dim font-bold uppercase tracking-widest';
+            
+            holdTimeout = setTimeout(() => {
+              state = 'READY';
+              timerContainer.classList.remove('bg-tertiary-container/10');
+              timerContainer.classList.add('bg-primary-container/10');
+              timerStatusLabel.textContent = 'READY! RELEASE TO START';
+              timerStatusLabel.className = 'font-label-mono-xs text-label-mono-xs text-primary-fixed-dim font-bold uppercase tracking-widest';
+            }, 300);
+          } else if (state === 'RUNNING') {
+            // Stop timer
+            state = 'STOPPED';
+            clearInterval(timerInterval);
+            timerContainer.classList.remove('bg-primary-container/10');
+            timerStatusLabel.textContent = 'ROUND SOLVE REGISTERED';
+            timerStatusLabel.className = 'font-label-mono-xs text-label-mono-xs text-primary-fixed font-bold uppercase tracking-widest';
+            pressInstruction.classList.remove('hidden');
+          }
+        }
+      });
+
+      window.addEventListener('keyup', (e) => {
+        if (e.code === 'Space' && e.target.tagName !== 'INPUT') {
+          e.preventDefault();
+          clearTimeout(holdTimeout);
+          if (state === 'READY') {
+            state = 'RUNNING';
+            startTime = Date.now();
+            timerContainer.classList.remove('bg-primary-container/10');
+            pressInstruction.classList.add('hidden');
+            timerStatusLabel.textContent = 'SOLVING IN PROGRESS...';
+            timerStatusLabel.className = 'font-label-mono-xs text-label-mono-xs text-secondary font-bold uppercase tracking-widest';
+            
+            timerInterval = setInterval(() => {
+              const delta = Date.now() - startTime;
+              updateDisplay(delta);
+            }, 10);
+          } else if (state === 'ARMING') {
+            state = 'IDLE';
+            timerContainer.classList.remove('bg-tertiary-container/10');
+            timerStatusLabel.textContent = 'HOLD FOR 0.3s UNTIL GREEN';
+            timerStatusLabel.className = 'font-label-mono-xs text-label-mono-xs text-on-surface-variant font-bold uppercase tracking-widest';
+          }
+        }
+      });
+
+      // Quick Penalties
+      if (btnPlusTwo) {
+        btnPlusTwo.addEventListener('click', () => {
+          let curr = parseFloat(timerMain.textContent) + 2;
+          timerMain.textContent = curr < 10 ? '0' + curr : curr;
+          btnPlusTwo.classList.toggle('bg-error-container');
+          btnPlusTwo.classList.toggle('text-on-error-container');
+        });
+      }
+
+      if (btnDnf) {
+        btnDnf.addEventListener('click', () => {
+          timerMain.textContent = 'DN';
+          timerSub.textContent = 'F';
+          timerStatusLabel.textContent = 'SOLVE MARKED AS DNF';
+          timerStatusLabel.className = 'font-label-mono-xs text-label-mono-xs text-error font-bold uppercase tracking-widest';
+        });
+      }
+
+      if (btnReset) {
+        btnReset.addEventListener('click', () => {
+          clearInterval(timerInterval);
+          state = 'IDLE';
+          timerMain.textContent = '13';
+          timerSub.textContent = '42';
+          timerStatusLabel.textContent = 'ROUND 3 RECORDED (CONFIRMED)';
+          timerStatusLabel.className = 'font-label-mono-xs text-label-mono-xs text-primary font-bold uppercase tracking-widest';
+          pressInstruction.classList.remove('hidden');
+        });
+      }
+
+      // Simulated auto-advance ticker
+      setInterval(() => {
+        if (advanceSeconds > 0) {
+          advanceSeconds--;
+          advanceCountdown.textContent = '0' + advanceSeconds + 's';
+        } else {
+          advanceCountdown.textContent = 'LAUNCHING';
+        }
+      }, 1000);
+
+    })();
+  </script>
+</div></main><footer class="w-full bg-surface-container-lowest py-space-md mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.5)]"><div class="w-full px-gutter-desktop flex flex-col md:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-md font-label-mono-xs text-label-mono-xs text-on-surface-variant"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="text-on-surface">1,429 Online</span></div><span class="text-surface-bright">|</span><span class="">v1.0.4-beta</span><span class="text-surface-bright">|</span><span class="text-secondary">All Nodes Operational</span></div><div class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-right"><p class="">WCA-compliant scramble generator notation (TNoodle spec). Unofficial community arena.</p></div></div></footer>
+
+</body></html>

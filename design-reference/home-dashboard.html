@@ -1,0 +1,427 @@
+<!DOCTYPE html><html class="dark" lang="en" style="" data-lt-installed="true"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><meta content="web_standard" name="shell-type"><title>Cube Arena - Competitive Multiplayer Speedcubing</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{colors:{"on-tertiary-fixed":"#400011","tertiary-fixed-dim":"#ffb2ba","on-secondary":"#00363d","surface-container":"#1c2025","on-secondary-fixed":"#001f24","surface-bright":"#36393f","on-secondary-container":"#00616d","secondary-container":"#00e3fd","tertiary-container":"#ffd4d7","on-tertiary-fixed-variant":"#910030","secondary":"#bdf4ff","inverse-surface":"#e0e2ea","surface-container-highest":"#31353b","on-tertiary-container":"#c40044","primary-fixed-dim":"#00e478","surface-container-lowest":"#0a0e14","primary-container":"#00ff87","outline-variant":"#3b4b3d","on-error":"#690005","secondary-fixed-dim":"#00daf3","secondary-fixed":"#9cf0ff","inverse-primary":"#006d36","surface-container-low":"#181c21","tertiary":"#fffaf9","outline":"#849585","on-surface-variant":"#b9cbb9","on-primary-fixed-variant":"#005227","on-tertiary":"#670020","on-primary-container":"#007138","surface-dim":"#101419","on-primary-fixed":"#00210c","on-error-container":"#ffdad6","primary":"#f1ffef","inverse-on-surface":"#2d3136","surface-tint":"#00e478","on-secondary-fixed-variant":"#004f58","surface-container-high":"#262a30","on-primary":"#003919","primary-fixed":"#60ff98","on-background":"#e0e2ea","error-container":"#93000a","on-surface":"#e0e2ea","surface":"#101419","background":"#101419","tertiary-fixed":"#ffd9dc","surface-variant":"#31353b","error":"#ffb4ab"},borderRadius:{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},spacing:{"space-sm":"0.5rem","space-lg":"1.5rem","gutter-desktop":"1.5rem","gutter":"1rem","space-xs":"0.25rem","space-xl":"2.5rem","margin-desktop":"2.5rem","space-md":"1rem","margin":"1rem"},fontFamily:{"label-mono-sm":["JetBrains Mono"],"scramble-lg":["JetBrains Mono"],"display-timer":["JetBrains Mono"],"headline-md":["Space Grotesk"],"body-lg":["Geist"],"headline-lg-mobile":["Space Grotesk"],"display-timer-mobile":["JetBrains Mono"],"headline-lg":["Space Grotesk"],"scramble-sm":["JetBrains Mono"],"body-sm":["Geist"],"label-mono-xs":["JetBrains Mono"],"headline-sm":["Space Grotesk"],"body-md":["Geist"]},fontSize:{"label-mono-sm":["12px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}],"scramble-lg":["24px",{"lineHeight":"36px","letterSpacing":"0.08em","fontWeight":"500"}],"display-timer":["96px",{"lineHeight":"96px","letterSpacing":"-0.04em","fontWeight":"700"}],"headline-md":["24px",{"lineHeight":"32px","letterSpacing":"-0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg-mobile":["28px",{"lineHeight":"36px","letterSpacing":"-0.01em","fontWeight":"700"}],"display-timer-mobile":["56px",{"lineHeight":"56px","letterSpacing":"-0.03em","fontWeight":"700"}],"headline-lg":["40px",{"lineHeight":"48px","letterSpacing":"-0.02em","fontWeight":"700"}],"scramble-sm":["16px",{"lineHeight":"24px","letterSpacing":"0.06em","fontWeight":"500"}],"body-sm":["12px",{"lineHeight":"16px","fontWeight":"400"}],"label-mono-xs":["10px",{"lineHeight":"14px","letterSpacing":"0.08em","fontWeight":"500"}],"headline-sm":["18px",{"lineHeight":"24px","letterSpacing":"0em","fontWeight":"600"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}]}}}}</script></head><body class="bg-surface font-body-md text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen flex flex-col justify-between"><header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.6)]"><div class="h-16 w-full px-gutter-desktop flex items-center justify-between gap-space-md"><div class="flex items-center gap-space-lg"><div class="flex items-center gap-space-sm cursor-pointer"><img alt="Cube Arena Logo" class="h-8 w-auto object-contain" src="https://lh3.googleusercontent.com/aida/AEtjO1VQhT8H494EXPxX3NWhb9xaTsVMXIxqEiyhZM7sAQo3PUdu5bvoVCCXf_pxFSlfnuf6sGJNZM12VxRzH64DJaxr-wH-juVScA9Enr8HAtnzCDmQLUTcUwDhKwMAJ4jXGF1gj1_CYQSoYiPsGu31qjvyXhV8CubEKB7udG1bvcKl56QVEkStmxvmTkQsLge18199E1wnIOTpjn9dVo3v3g3Fwv_3nJd9eGWgPsO5gMDWrGHoGyy2t0j1cQ0"><div class="flex flex-col"><span class="font-headline-sm text-headline-sm uppercase tracking-wider text-primary">CUBE ARENA</span><div class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-pulse"></span></div></div></div><nav class="hidden xl:flex items-center gap-space-xs" data-active-classes="bg-surface-container-high text-primary font-bold"><a aria-current="page" class="px-space-md py-space-xs transition-all bg-surface-container-high text-primary font-bold" data-path="home" href="#">Home</a><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="multiplayer-rooms" href="#">Multiplayer Rooms</a><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="global-rankings" href="#">Global Rankings</a><a class="font-body-md text-body-md px-space-md py-space-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-all" data-path="profile" href="#">Profile</a></nav></div><div class="flex items-center gap-space-md"><div class="hidden md:flex items-center gap-1.5 bg-surface-container px-space-sm py-1"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed">14ms Frankfurt</span></div><button class="flex items-center gap-1.5 bg-surface-container px-space-md py-space-xs font-label-mono-sm text-label-mono-sm text-primary-container hover:bg-primary-container hover:text-on-primary-container transition-all" type="button"><span class="material-symbols-outlined text-sm leading-none">add</span><span class="">New Room</span></button><div class="flex items-center gap-space-sm bg-surface-container-low px-space-sm py-1"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6Mr2ho7p06z6u2Y8tFAxL2rr1fM9oZi1kFLoQ6kaA5o7DPhLBiiGgYy8tiFbQQ4P0iqn01NR_iKsHc3nzjAmzmad4dpCGQtMz3Ccp_XAshZi-QtEMSO_DbCktARfrsko2V7aPs3hFqye2sJIK_4ta3MQmJ8Sm-NkeHOaeXZyB3x718dJELPL_xNKPzvNfbqtqtGj6IdSRRYJRCaJZdQ0WF4kmz-Iib2QpHpAFFBNK06w-6IXRr9yi"><div class="hidden sm:flex flex-col text-left"><div class="flex items-center gap-1.5"><span class="font-body-sm text-body-sm font-semibold text-on-surface">Shine</span><span class="bg-surface-container-highest px-1 font-label-mono-xs text-label-mono-xs text-secondary">#128 Global 3x3</span></div><span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">@shine_cubes</span></div><button aria-label="Settings" class="text-on-surface-variant hover:text-on-surface transition-colors" type="button"><span class="material-symbols-outlined text-lg leading-none">settings</span></button></div></div></div></header><main class="w-full pt-16 bg-surface"><div class="flex flex-col w-full">
+<!-- Dynamic Atmospheric Glow Backdrop -->
+<div class="relative w-full overflow-hidden px-gutter-desktop py-space-xl">
+<div class="absolute -top-32 -left-20 w-96 h-96 rounded-full bg-primary-fixed-dim/5 blur-3xl pointer-events-none"></div>
+<div class="absolute top-1/4 -right-32 w-80 h-80 rounded-full bg-secondary-container/5 blur-3xl pointer-events-none"></div>
+<!-- Main Container -->
+<div class="max-w-7xl mx-auto flex flex-col gap-space-xl">
+<!-- Greeting & Telemetry Header Banner -->
+<section class="relative bg-surface-container-low/90 backdrop-blur-md p-space-lg rounded-xl shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-space-md">
+<div class="flex flex-col gap-1 z-10">
+<div class="flex items-center gap-space-sm">
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded-full bg-primary-container/10 text-primary-fixed-dim tracking-widest uppercase">SEASON 1 LADDER ACTIVE</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-fixed-dim animate-ping"></span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-primary tracking-tight">
+            Welcome back, <span class="text-primary-fixed-dim">Shine!</span>
+</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-xl">
+            Ready to compete? Season 1 ladder is currently live. Over 42 active lobbies worldwide waiting for your pace.
+          </p>
+</div>
+<!-- Ambient Visual & Micro Metrics -->
+<div class="flex items-center gap-space-md w-full md:w-auto pt-space-xs md:pt-0">
+<div class="flex items-center gap-space-sm bg-surface-container px-space-md py-space-sm rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim">bolt</span>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Network Latency</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary">12ms (Optimal)</span>
+</div>
+</div>
+<div class="flex items-center gap-space-sm bg-surface-container px-space-md py-space-sm rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-secondary">timer</span>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Current Form</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary-fixed-dim">Sub-13 Pace</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Primary Action Gateway: Create vs Join -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- CARD 1: CREATE A ROOM (Monolithic Kinetic Card with Phosphorescent Highlight) -->
+<div class="lg:col-span-7 relative group bg-surface-container-low rounded-xl p-space-lg shadow-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-[0_0_35px_-8px_rgba(0,255,135,0.22)]">
+<!-- Ambient gradient flare -->
+<div class="absolute -top-24 -right-24 w-60 h-60 bg-primary-container/10 rounded-full blur-2xl group-hover:bg-primary-container/15 transition-all"></div>
+<div class="flex flex-col gap-space-md relative z-10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container/20 flex items-center justify-center text-primary-fixed-dim">
+<span class="material-symbols-outlined text-lg leading-none">add_box</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs uppercase tracking-widest text-primary-fixed-dim">Host Competition</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant bg-surface-container px-2 py-0.5 rounded-full">WCA Notation v3.2</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-primary">CREATE A ROOM</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Configure rounds, strictness flags, and challenge world rivals with zero sync delay.</p>
+</div>
+<!-- Event & Format Customizer Selection -->
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-space-sm pt-space-xs">
+<!-- Event selector -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Event Discipline</label>
+<div class="flex items-center gap-1.5 bg-surface-container p-1 rounded-lg">
+<button class="flex-1 py-1 px-2 rounded-lg bg-surface-container-highest text-primary font-label-mono-sm text-label-mono-sm text-center" type="button">3x3</button>
+<button class="flex-1 py-1 px-2 rounded-lg text-on-surface-variant hover:text-primary font-label-mono-sm text-label-mono-sm text-center transition-colors" type="button">2x2</button>
+<button class="flex-1 py-1 px-2 rounded-lg text-on-surface-variant hover:text-primary font-label-mono-sm text-label-mono-sm text-center transition-colors" type="button">4x4</button>
+<button class="flex-1 py-1 px-2 rounded-lg text-on-surface-variant hover:text-primary font-label-mono-sm text-label-mono-sm text-center transition-colors" type="button">OH</button>
+</div>
+</div>
+<!-- Format selector -->
+<div class="flex flex-col gap-1.5">
+<label class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Match Format</label>
+<div class="flex items-center gap-1.5 bg-surface-container p-1 rounded-lg">
+<button class="flex-1 py-1 px-2 rounded-lg bg-surface-container-highest text-primary font-label-mono-sm text-label-mono-sm text-center" type="button">Ao5 Standard</button>
+<button class="flex-1 py-1 px-2 rounded-lg text-on-surface-variant hover:text-primary font-label-mono-sm text-label-mono-sm text-center transition-colors" type="button">One Solve</button>
+<button class="flex-1 py-1 px-2 rounded-lg text-on-surface-variant hover:text-primary font-label-mono-sm text-label-mono-sm text-center transition-colors" type="button">Best of 3</button>
+</div>
+</div>
+</div>
+<!-- Privacy & Capacity Toggle Controls -->
+<div class="flex items-center justify-between bg-surface-container p-space-sm rounded-lg mt-space-xs">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary text-sm">lock_open</span>
+<span class="font-body-sm text-body-sm text-on-surface">Visibility Mode:</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim bg-surface-container-highest px-2 py-0.5 rounded-full">Public Arena</span>
+</div>
+<div class="flex items-center gap-space-xs">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Max Solvers:</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary bg-surface-container-highest px-2 py-0.5 rounded">8</span>
+</div>
+</div>
+</div>
+<!-- Bottom Action Button -->
+<div class="pt-space-lg relative z-10">
+<button class="w-full bg-primary-container text-on-primary-container font-headline-sm text-headline-sm py-space-sm px-space-md rounded-lg flex items-center justify-center gap-space-sm shadow-md hover:opacity-95 transition-all" type="button">
+<span class="material-symbols-outlined text-xl">sensors</span>
+<span class="">HOST NOW</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- CARD 2: JOIN A ROOM (Cyan Cyber-Chamber with Keypad Preview) -->
+<div class="lg:col-span-5 relative group bg-surface-container-low rounded-xl p-space-lg shadow-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-[0_0_35px_-8px_rgba(0,227,253,0.18)]">
+<!-- Cyan glow accent -->
+<div class="absolute -bottom-24 -right-24 w-60 h-60 bg-secondary-container/10 rounded-full blur-2xl group-hover:bg-secondary-container/15 transition-all"></div>
+<div class="flex flex-col gap-space-md relative z-10">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<div class="w-8 h-8 rounded-lg bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-lg leading-none">pin</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs uppercase tracking-widest text-secondary">Direct Connect</span>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary-fixed bg-surface-container px-2 py-0.5 rounded-full">Instant Relay</span>
+</div>
+<div class="flex flex-col">
+<h2 class="font-headline-md text-headline-md text-primary">JOIN A ROOM</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Enter a 6-character room code to drop straight into the timer matrix.</p>
+</div>
+<!-- PIN Code Input Emulation -->
+<div class="flex flex-col gap-space-xs pt-space-xs">
+<label class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Enter 6-Digit Code</label>
+<div class="grid grid-cols-6 gap-2">
+<input class="w-full h-12 bg-surface-container text-center font-display-timer-mobile text-headline-md text-secondary rounded-lg outline-none focus:bg-surface-container-high transition-colors uppercase cursor-pointer" maxlength="1" readonly="" type="text" value="K">
+<input class="w-full h-12 bg-surface-container text-center font-display-timer-mobile text-headline-md text-secondary rounded-lg outline-none focus:bg-surface-container-high transition-colors uppercase cursor-pointer" maxlength="1" readonly="" type="text" value="7">
+<input class="w-full h-12 bg-surface-container text-center font-display-timer-mobile text-headline-md text-secondary rounded-lg outline-none focus:bg-surface-container-high transition-colors uppercase cursor-pointer" maxlength="1" readonly="" type="text" value="X">
+<input class="w-full h-12 bg-surface-container-high text-center font-display-timer-mobile text-headline-md text-on-surface-variant rounded-lg outline-none focus:bg-surface-container-highest transition-colors uppercase" maxlength="1" placeholder="•" type="text">
+<input class="w-full h-12 bg-surface-container-high text-center font-display-timer-mobile text-headline-md text-on-surface-variant rounded-lg outline-none focus:bg-surface-container-highest transition-colors uppercase" maxlength="1" placeholder="•" type="text">
+<input class="w-full h-12 bg-surface-container-high text-center font-display-timer-mobile text-headline-md text-on-surface-variant rounded-lg outline-none focus:bg-surface-container-highest transition-colors uppercase" maxlength="1" placeholder="•" type="text">
+</div>
+</div>
+<!-- Quick Join Invitation Shortcut -->
+<div class="bg-surface-container/60 p-space-sm rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex items-center gap-space-xs min-w-0">
+<span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span>
+<span class="font-body-sm text-body-sm text-on-surface-variant truncate">Invite from <strong class="text-primary font-semibold">PixelSolve</strong>: <code class="text-secondary font-label-mono-xs">#PX94L2</code></span>
+</div>
+<button class="font-label-mono-xs text-label-mono-xs text-secondary hover:text-primary transition-colors whitespace-nowrap" type="button">Auto-Fill</button>
+</div>
+</div>
+<!-- Bottom Action Button -->
+<div class="pt-space-lg relative z-10">
+<button class="w-full bg-surface-container-highest text-secondary hover:bg-secondary hover:text-on-secondary font-headline-sm text-headline-sm py-space-sm px-space-md rounded-lg flex items-center justify-center gap-space-sm shadow-md transition-all" type="button">
+<span class="material-symbols-outlined text-xl">login</span>
+<span class="">JOIN MATCH</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Horizontal Telemetry Ribbon: 'YOUR STATS' -->
+<section class="w-full bg-surface-container-lowest p-space-md rounded-xl shadow-inner overflow-x-auto">
+<div class="min-w-[700px] flex items-center justify-between gap-space-md">
+<div class="flex items-center gap-space-sm pr-space-md border-r-0">
+<span class="material-symbols-outlined text-primary-fixed-dim">equalizer</span>
+<span class="font-label-mono-sm text-label-mono-sm text-primary uppercase tracking-wider">YOUR STATS</span>
+</div>
+<div class="flex items-center gap-space-xl flex-1 justify-around">
+<!-- Matches & Win Rate -->
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Total Matches</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-sm text-headline-sm text-primary">24</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim">15 Wins</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Win Rate</span>
+<div class="flex items-baseline gap-1.5">
+<span class="font-headline-sm text-headline-sm text-primary-container">62.5%</span>
+<div class="w-12 h-1.5 bg-surface-container-highest rounded-full overflow-hidden self-center">
+<div class="h-full bg-primary-fixed-dim w-[62.5%]"></div>
+</div>
+</div>
+</div>
+<!-- Best 3x3 Single -->
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Best 3x3 Single</span>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-sm text-headline-sm text-secondary">12.84<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">s</span></span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim bg-primary-container/10 px-1 rounded">PR</span>
+</div>
+</div>
+<!-- Best 3x3 Ao5 -->
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Best 3x3 Ao5</span>
+<span class="font-headline-sm text-headline-sm text-primary">13.49<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">s</span></span>
+</div>
+<!-- Streak -->
+<div class="flex flex-col">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">Current Streak</span>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-sm text-primary-fixed-dim">local_fire_department</span>
+<span class="font-headline-sm text-headline-sm text-primary-fixed-dim font-bold">3W</span>
+</div>
+</div>
+</div>
+<div class="pl-space-md">
+<button class="p-2 bg-surface-container hover:bg-surface-container-high rounded-lg text-on-surface-variant hover:text-primary transition-colors" title="Full Analytics Report" type="button">
+<span class="material-symbols-outlined text-sm leading-none">insights</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Two-Column Arena Grid: Recent Battles & Live Standings Snapshot -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-space-lg">
+<!-- COLUMN 1: RECENT COMPETITIONS (7 cols) -->
+<div class="lg:col-span-7 flex flex-col gap-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim">history</span>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight">RECENT COMPETITIONS</h3>
+</div>
+<a class="font-label-mono-xs text-label-mono-xs text-on-surface-variant hover:text-primary transition-colors flex items-center gap-1" href="#">
+<span class="">View Solve Archive</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+</a>
+</div>
+<!-- Match Stack -->
+<div class="flex flex-col gap-space-xs">
+<!-- Match Item 1: 3x3 Ao5 Gold -->
+<div class="bg-surface-container-low hover:bg-surface-container p-space-md rounded-xl transition-all shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-xl shadow-inner">
+                  🏆
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary">3x3 Ao5</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-primary-container/20 text-primary-fixed-dim">1st Place</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">vs AlexCuber, PixelSolve</span>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg w-full sm:w-auto">
+<div class="flex flex-col text-left sm:text-right">
+<span class="font-headline-sm text-headline-sm text-primary-fixed-dim">13.49s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">20m ago</span>
+</div>
+<button class="p-2 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors" title="Inspect Times" type="button">
+<span class="material-symbols-outlined text-base">bar_chart</span>
+</button>
+</div>
+</div>
+<!-- Match Item 2: 2x2 Single Silver -->
+<div class="bg-surface-container-low hover:bg-surface-container p-space-md rounded-xl transition-all shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-xl shadow-inner">
+                  🥈
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary">2x2 Single</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-highest text-secondary">2nd Place</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">vs Nexo</span>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg w-full sm:w-auto">
+<div class="flex flex-col text-left sm:text-right">
+<span class="font-headline-sm text-headline-sm text-primary">4.21s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">1h ago</span>
+</div>
+<button class="p-2 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors" title="Inspect Times" type="button">
+<span class="material-symbols-outlined text-base">bar_chart</span>
+</button>
+</div>
+</div>
+<!-- Match Item 3: 3x3 One Solve PR Gold -->
+<div class="bg-surface-container-low hover:bg-surface-container p-space-md rounded-xl transition-all shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-primary-container/20 flex items-center justify-center text-xl shadow-inner">
+                  🏆
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary">3x3 One Solve</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-primary-container/20 text-primary-fixed-dim">1st Place</span>
+<span class="font-label-mono-xs text-label-mono-xs px-1.5 py-0.2 rounded bg-primary-container text-on-primary-container font-bold">PR</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Ranked Duel (Solo Scramble)</span>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg w-full sm:w-auto">
+<div class="flex flex-col text-left sm:text-right">
+<span class="font-headline-sm text-headline-sm text-primary-fixed-dim">12.84s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">3h ago</span>
+</div>
+<button class="p-2 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors" title="Inspect Times" type="button">
+<span class="material-symbols-outlined text-base">bar_chart</span>
+</button>
+</div>
+</div>
+<!-- Match Item 4: 4x4 Ao5 Bronze -->
+<div class="bg-surface-container-low hover:bg-surface-container p-space-md rounded-xl transition-all shadow-sm flex flex-col sm:flex-row items-start sm:items-center justify-between gap-space-md group">
+<div class="flex items-center gap-space-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-xl shadow-inner">
+                  🥉
+                </div>
+<div class="flex flex-col">
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm text-primary">4x4 Ao5</span>
+<span class="font-label-mono-xs text-label-mono-xs px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant">3rd Place</span>
+</div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">vs QuadMaster, CubingFinn</span>
+</div>
+</div>
+<div class="flex items-center justify-between sm:justify-end gap-space-lg w-full sm:w-auto">
+<div class="flex flex-col text-left sm:text-right">
+<span class="font-headline-sm text-headline-sm text-on-surface">52.31s</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">Yesterday</span>
+</div>
+<button class="p-2 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface-variant hover:text-primary transition-colors" title="Inspect Times" type="button">
+<span class="material-symbols-outlined text-base">bar_chart</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- COLUMN 2: GLOBAL RANKINGS SNAPSHOT & ACTIVE ROOMS (5 cols) -->
+<div class="lg:col-span-5 flex flex-col gap-space-lg">
+<!-- Rankings Mini Card -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-md rounded-xl shadow-sm">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-secondary">leaderboard</span>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight">GLOBAL RANKINGS</h3>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim bg-surface-container px-2 py-0.5 rounded-full">Updated 4m ago</span>
+</div>
+<!-- Metric Split Cards -->
+<div class="grid grid-cols-2 gap-space-sm pt-space-xs">
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">3x3 Single</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim font-bold">Top 4%</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md text-primary font-bold">#128</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">/ 3,240</span>
+</div>
+</div>
+<div class="bg-surface-container p-space-sm rounded-lg flex flex-col gap-1">
+<div class="flex items-center justify-between">
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant uppercase">2x2 Single</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary font-bold">Top 1.5%</span>
+</div>
+<div class="flex items-baseline gap-1">
+<span class="font-headline-md text-headline-md text-secondary font-bold">#46</span>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">/ 3,110</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Live Public Lobbies Quick-Browser -->
+<div class="flex flex-col gap-space-sm bg-surface-container-low p-space-md rounded-xl shadow-sm flex-1">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<span class="material-symbols-outlined text-primary-fixed-dim">public</span>
+<h3 class="font-headline-sm text-headline-sm text-primary tracking-tight">LIVE PUBLIC ROOMS</h3>
+</div>
+<span class="font-label-mono-xs text-label-mono-xs text-on-surface-variant">14 Online Rooms</span>
+</div>
+<!-- Public Room Row 1 -->
+<div class="bg-surface-container p-space-sm rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md font-semibold text-primary truncate">Speedy 3x3 Ao5</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim bg-surface-container-highest px-1.5 py-0.2 rounded">Waiting</span>
+</div>
+<div class="flex items-center gap-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="">👥 4/8 Solvers</span>
+<span class="">•</span>
+<span class="">Host: FastTrack</span>
+</div>
+</div>
+<button class="px-space-md py-1.5 bg-primary-container text-on-primary-container hover:opacity-90 font-label-mono-xs text-label-mono-xs rounded transition-all whitespace-nowrap" type="button">
+                Join
+              </button>
+</div>
+<!-- Public Room Row 2 -->
+<div class="bg-surface-container p-space-sm rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md font-semibold text-primary truncate">Casual 2x2 Sprint</span>
+<span class="font-label-mono-xs text-label-mono-xs text-secondary-container bg-surface-container-highest px-1.5 py-0.2 rounded">Round 2</span>
+</div>
+<div class="flex items-center gap-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="">👥 6/8 Solvers</span>
+<span class="">•</span>
+<span class="">Host: CubeNinja</span>
+</div>
+</div>
+<button class="px-space-md py-1.5 bg-surface-container-highest text-secondary hover:text-primary font-label-mono-xs text-label-mono-xs rounded transition-all whitespace-nowrap" type="button">
+                Spectate
+              </button>
+</div>
+<!-- Public Room Row 3 -->
+<div class="bg-surface-container p-space-sm rounded-lg flex items-center justify-between gap-space-sm">
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-2">
+<span class="font-body-md text-body-md font-semibold text-primary truncate">Sub-10 Practice (3x3)</span>
+<span class="font-label-mono-xs text-label-mono-xs text-primary-fixed-dim bg-surface-container-highest px-1.5 py-0.2 rounded">Waiting</span>
+</div>
+<div class="flex items-center gap-2 font-label-mono-xs text-label-mono-xs text-on-surface-variant">
+<span class="">👥 2/4 Solvers</span>
+<span class="">•</span>
+<span class="">Host: ZephyrCube</span>
+</div>
+</div>
+<button class="px-space-md py-1.5 bg-primary-container text-on-primary-container hover:opacity-90 font-label-mono-xs text-label-mono-xs rounded transition-all whitespace-nowrap" type="button">
+                Join
+              </button>
+</div>
+<!-- Bottom Browse All Link -->
+<a class="mt-auto pt-space-xs text-center font-label-mono-xs text-label-mono-xs text-secondary hover:text-primary transition-colors flex items-center justify-center gap-1" href="#">
+<span class="">View All 14 Public Competitions</span>
+<span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest py-space-md mt-auto shadow-[0_-1px_8px_rgba(0,0,0,0.5)]"><div class="w-full px-gutter-desktop flex flex-col md:flex-row items-center justify-between gap-space-sm"><div class="flex items-center gap-space-md font-label-mono-xs text-label-mono-xs text-on-surface-variant"><div class="flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-primary-fixed-dim"></span><span class="text-on-surface">1,429 Online</span></div><span class="text-surface-bright">|</span><span class="">v1.0.4-beta</span><span class="text-surface-bright">|</span><span class="text-secondary">All Nodes Operational</span></div><div class="font-body-sm text-body-sm text-on-surface-variant text-center md:text-right"><p class="">WCA-compliant scramble generator notation (TNoodle spec). Unofficial community arena.</p></div></div></footer></body></html>
