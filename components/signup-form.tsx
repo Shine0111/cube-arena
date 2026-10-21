@@ -21,6 +21,7 @@ export default function SignupForm() {
       email,
       password,
       options: {
+        emailRedirectTo: `${window.location.origin}/auth/callback?next=/onboarding`,
         data: {
           display_name: displayName,
         },
