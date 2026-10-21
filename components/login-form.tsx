@@ -18,7 +18,7 @@ export default function LoginForm() {
     setMessage("");
     setLoading(true);
 
-    const { error } = await supabase.auth.signInWithPassword({
+    const { error, data } = await supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -29,13 +29,31 @@ export default function LoginForm() {
       return;
     }
 
+    const { data: profile, error: profileError } = await supabase
+      .from("profiles")
+      .select("onboarding_completed")
+      .eq("id", data.user.id)
+      .single();
+
+    if (profileError || !profile) {
+      setMessage(
+        "Signed in, but we couldn't load your profile. Please try again.",
+      );
+      setLoading(false);
+      return;
+    }
+
     const params = new URLSearchParams(window.location.search);
     const next = params.get("next");
 
-    const destination =
-      next?.startsWith("/") && !next.startsWith("//") ? next : "/onboarding";
+    const safeNext =
+      next?.startsWith("/") && !next.startsWith("//") ? next : null;
 
-    router.push(destination);
+    const destination = !profile.onboarding_completed
+      ? "/onboarding"
+      : safeNext || "/profile";
+
+    router.replace(destination);
     router.refresh();
   }
 

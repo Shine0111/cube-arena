@@ -50,7 +50,10 @@ export default function OnboardingForm() {
 
     const { error } = await supabase
       .from("profiles")
-      .update({ username: normalizedUsername })
+      .update({
+        username: normalizedUsername,
+        onboarding_completed: true,
+      })
       .eq("id", userData.user.id);
 
     if (error) {
