@@ -1,6 +1,8 @@
 import CompetitionTimer from "@/components/timer/competition-timer";
+import RoomLobby from "@/components/rooms/room-lobby";
 
-export default function Page() {
+export default function Page({ params }: { params: { roomId: string } }) {
+  const roomId = params.roomId;
   return (
     <main className="min-h-screen bg-zinc-950 px-6 py-12 text-white">
       <div className="mx-auto max-w-5xl">
@@ -13,6 +15,10 @@ export default function Page() {
         <p className="mt-2 text-zinc-400">
           Timer prototype · Multiplayer integration coming next
         </p>
+
+        <div className="mt-10">
+          <RoomLobby roomId={roomId} />
+        </div>
 
         <div className="mt-10">
           <CompetitionTimer />
