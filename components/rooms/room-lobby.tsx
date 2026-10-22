@@ -16,6 +16,10 @@ type RoomMember = {
   user_id: string;
   role: "host" | "player";
   is_ready: boolean;
+  profile: {
+    username: string | null;
+    display_name: string | null;
+  } | null;
 };
 
 export default function RoomLobby({ roomId }: { roomId: string }) {
@@ -55,11 +59,40 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
       if (cancelled) return;
 
       if (memberError) {
-        setError(memberError.message);
-      } else {
-        setRoom(roomData as Room);
-        setMembers((memberData ?? []) as RoomMember[]);
+        if (!cancelled) {
+          setError(memberError.message);
+          setLoading(false);
+        }
+        return;
       }
+
+      const userIds = (memberData ?? []).map((member) => member.user_id);
+
+      const { data: profileData, error: profileError } = await supabase
+        .from("profiles")
+        .select("id, username, display_name")
+        .in("id", userIds);
+
+      if (cancelled) return;
+
+      if (profileError) {
+        setError(profileError.message);
+        setLoading(false);
+        return;
+      }
+
+      const profilesById = new Map(
+        (profileData ?? []).map((profile) => [profile.id, profile]),
+      );
+
+      setRoom(roomData as Room);
+
+      setMembers(
+        (memberData ?? []).map((member) => ({
+          ...member,
+          profile: profilesById.get(member.user_id) ?? null,
+        })) as RoomMember[],
+      );
 
       setLoading(false);
     }
@@ -133,8 +166,11 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
                 key={member.user_id}
                 className="flex items-center justify-between rounded-lg bg-zinc-800/60 px-4 py-3"
               >
-                <span className="font-mono text-sm">
-                  {member.user_id.slice(0, 8)}...
+                <span className="font-medium">
+                  {member.profile?.display_name ||
+                    (member.profile?.username
+                      ? `@${member.profile.username}`
+                      : `Player ${member.user_id.slice(0, 8)}`)}
                 </span>
 
                 <span className="text-sm text-zinc-400">
