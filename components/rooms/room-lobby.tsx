@@ -66,8 +66,25 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
 
     loadRoom();
 
+    const channel = supabase
+      .channel(`room-members-${roomId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "*",
+          schema: "public",
+          table: "room_members",
+          filter: `room_id=eq.${roomId}`,
+        },
+        () => {
+          void loadRoom();
+        },
+      )
+      .subscribe();
+
     return () => {
       cancelled = true;
+      void supabase.removeChannel(channel);
     };
   }, [roomId]);
 
