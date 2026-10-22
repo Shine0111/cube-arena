@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import SharedScramble from "./shared-scramble";
+import StartCompetitionButton from "@/components/rooms/start-competition-button";
 
 type Room = {
   id: string;
@@ -118,7 +119,7 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
 
     loadRoom();
 
-    const channel = supabase
+    const membersChannel = supabase
       .channel(`room-members-${roomId}`)
       .on(
         "postgres_changes",
@@ -137,8 +138,6 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
               is_ready: boolean;
             };
 
-            if (updated.room_id !== roomId) return;
-
             setMembers((current) =>
               current.map((member) =>
                 member.user_id === updated.user_id
@@ -154,15 +153,40 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
             return;
           }
 
-          // Inserts and deletes still reload the membership list.
           void loadRoom();
+        },
+      )
+      .subscribe();
+
+    const roomChannel = supabase
+      .channel(`room-status-${roomId}`)
+      .on(
+        "postgres_changes",
+        {
+          event: "UPDATE",
+          schema: "public",
+          table: "rooms",
+          filter: `id=eq.${roomId}`,
+        },
+        (payload) => {
+          const updated = payload.new as Room;
+          setRoom((current) =>
+            current
+              ? {
+                  ...current,
+                  status: updated.status,
+                  current_scramble: updated.current_scramble,
+                }
+              : current,
+          );
         },
       )
       .subscribe();
 
     return () => {
       cancelled = true;
-      void supabase.removeChannel(channel);
+      void supabase.removeChannel(membersChannel);
+      void supabase.removeChannel(roomChannel);
     };
   }, [roomId]);
 
@@ -314,6 +338,19 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
           "host"
         }
         initialScramble={room.current_scramble}
+      />
+
+      <StartCompetitionButton
+        roomId={room.id}
+        isHost={
+          members.find((member) => member.user_id === currentUserId)?.role ===
+          "host"
+        }
+        roomStatus={room.status}
+        allReady={
+          members.length > 0 && members.every((member) => member.is_ready)
+        }
+        hasScramble={Boolean(room.current_scramble?.trim())}
       />
     </section>
   );
