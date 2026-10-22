@@ -323,8 +323,6 @@ export default function CompetitionTimer({
 
       // Press Space during a solve to stop and record it.
       if (currentStatus === "running") {
-        console.log("RUNNING");
-
         const endTime = performance.now();
         const startTime = startTimeRef.current;
 

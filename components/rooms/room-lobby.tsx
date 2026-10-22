@@ -6,6 +6,7 @@ import SharedScramble from "./shared-scramble";
 import StartCompetitionButton from "@/components/rooms/start-competition-button";
 import CompetitionTimer from "@/components/timer/competition-timer";
 import EndRoomButton from "@/components/rooms/end-room-button";
+import RoomResults from "@/components/rooms/room-results";
 
 type Room = {
   id: string;
@@ -368,6 +369,8 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
         roomId={room.id}
         scramble={room.current_scramble}
       />
+
+      <RoomResults roomId={room.id} />
     </section>
   );
 }
