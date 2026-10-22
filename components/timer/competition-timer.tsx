@@ -23,7 +23,13 @@ const READY_DELAY_MS = 300;
 const INSPECTION_LIMIT_MS = 15_000;
 const INSPECTION_DNF_MS = 17_000;
 
-export default function CompetitionTimer() {
+type CompetitionTimerProps = {
+  enabled?: boolean;
+};
+
+export default function CompetitionTimer({
+  enabled = true,
+}: CompetitionTimerProps) {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [elapsedMs, setElapsedMs] = useState(0);
   const [inspectionElapsedMs, setInspectionElapsedMs] = useState(0);
@@ -42,6 +48,7 @@ export default function CompetitionTimer() {
   );
   const userIdRef = useRef<string | null>(null);
   const authLoadedRef = useRef(false);
+  const enabledRef = useRef(enabled);
 
   const [userId, setUserId] = useState<string | null>(null);
   const [authLoaded, setAuthLoaded] = useState(false);
@@ -145,6 +152,10 @@ export default function CompetitionTimer() {
     return () => clearInterval(interval);
   }, [status]);
 
+  useEffect(() => {
+    enabledRef.current = enabled;
+  }, [enabled]);
+
   // Handle inspection, preparation, starting, and stopping.
   useEffect(() => {
     const currentUserId = () => userIdRef.current;
@@ -230,6 +241,7 @@ export default function CompetitionTimer() {
         return;
       }
 
+      if (!enabledRef.current) return;
       event.preventDefault();
       if (event.repeat) return;
       spaceHeldRef.current = true;

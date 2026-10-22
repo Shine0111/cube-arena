@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
 import SharedScramble from "./shared-scramble";
 import StartCompetitionButton from "@/components/rooms/start-competition-button";
+import CompetitionTimer from "@/components/timer/competition-timer";
+import EndRoomButton from "@/components/rooms/end-room-button";
 
 type Room = {
   id: string;
@@ -352,6 +354,15 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
         }
         hasScramble={Boolean(room.current_scramble?.trim())}
       />
+      <EndRoomButton
+        roomId={room.id}
+        isHost={
+          members.find((member) => member.user_id === currentUserId)?.role ===
+          "host"
+        }
+        roomStatus={room.status}
+      />
+      <CompetitionTimer enabled={room.status === "in_progress"} />
     </section>
   );
 }

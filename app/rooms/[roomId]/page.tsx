@@ -1,4 +1,3 @@
-import CompetitionTimer from "@/components/timer/competition-timer";
 import RoomLobby from "@/components/rooms/room-lobby";
 
 export default function Page({ params }: { params: { roomId: string } }) {
@@ -18,10 +17,6 @@ export default function Page({ params }: { params: { roomId: string } }) {
 
         <div className="mt-10">
           <RoomLobby roomId={roomId} />
-        </div>
-
-        <div className="mt-10">
-          <CompetitionTimer />
         </div>
       </div>
     </main>
