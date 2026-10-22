@@ -9,7 +9,6 @@ import {
 import { getAllSolves, saveSolve } from "@/lib/timer/solve-storage";
 import { createClient } from "@/lib/supabase/client";
 import { getAo5, getBestSingle, getSolveCount } from "@/lib/timer/statistics";
-import { log } from "console";
 
 async function saveCompetitionSolve({
   roomId,
@@ -66,6 +65,7 @@ export default function CompetitionTimer({
   enabled = true,
   roomId,
   scramble,
+  roundNumber,
 }: CompetitionTimerProps) {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [elapsedMs, setElapsedMs] = useState(0);
@@ -74,6 +74,7 @@ export default function CompetitionTimer({
 
   const statusRef = useRef<TimerStatus>("idle");
   const spaceHeldRef = useRef(false);
+  const attemptedRoundRef = useRef<number | null>(null);
 
   const startTimeRef = useRef<number | null>(null);
   const inspectionStartRef = useRef<number | null>(null);
@@ -86,6 +87,11 @@ export default function CompetitionTimer({
   const userIdRef = useRef<string | null>(null);
   const authLoadedRef = useRef(false);
   const enabledRef = useRef(enabled);
+  const roomContextRef = useRef({
+    roomId,
+    scramble,
+    roundNumber,
+  });
 
   const [userId, setUserId] = useState<string | null>(null);
   const [authLoaded, setAuthLoaded] = useState(false);
@@ -193,6 +199,43 @@ export default function CompetitionTimer({
     enabledRef.current = enabled;
   }, [enabled]);
 
+  // Update the room context when the room ID, scramble, or round number changes.
+  useEffect(() => {
+    roomContextRef.current = {
+      roomId,
+      scramble,
+      roundNumber,
+    };
+  }, [roomId, scramble, roundNumber]);
+
+  useEffect(() => {
+    if (roundNumber === undefined || roundNumber <= 0) {
+      return;
+    }
+
+    attemptedRoundRef.current = null;
+
+    if (holdTimeoutRef.current !== null) {
+      clearTimeout(holdTimeoutRef.current);
+      holdTimeoutRef.current = null;
+    }
+
+    if (inspectionTimeoutRef.current !== null) {
+      clearTimeout(inspectionTimeoutRef.current);
+      inspectionTimeoutRef.current = null;
+    }
+
+    spaceHeldRef.current = false;
+    startTimeRef.current = null;
+    inspectionStartRef.current = null;
+    activeInspectionMsRef.current = 0;
+
+    statusRef.current = "idle";
+    setStatus("idle");
+    setElapsedMs(0);
+    setInspectionElapsedMs(0);
+  }, [roomId, roundNumber]);
+
   // Handle inspection, preparation, starting, and stopping.
   useEffect(() => {
     const currentUserId = () => userIdRef.current;
@@ -234,13 +277,16 @@ export default function CompetitionTimer({
         });
 
         // Save the DNF solve to the competition room if applicable.
-        if (roomId && scramble?.trim()) {
+        const context = roomContextRef.current;
+
+        if (context.roomId && context.scramble?.trim()) {
           void saveCompetitionSolve({
-            roomId,
+            roomId: context.roomId,
             userId: ownerId,
-            scramble,
+            scramble: context.scramble,
             timeMs: newSolve.timeMs,
             penalty: newSolve.penalty,
+            roundNumber: context.roundNumber,
           }).catch((error) => {
             console.error("Failed to save competition solve:", error);
           });
@@ -294,17 +340,35 @@ export default function CompetitionTimer({
       if (!enabledRef.current) return;
       event.preventDefault();
       if (event.repeat) return;
+
+      const currentRound = roomContextRef.current.roundNumber;
+
+      if (
+        currentRound !== undefined &&
+        currentRound > 0 &&
+        attemptedRoundRef.current === currentRound
+      ) {
+        return;
+      }
+
       spaceHeldRef.current = true;
 
       const currentStatus = statusRef.current;
 
       // First press starts inspection. After a completed solve,
       // the next press begins a fresh inspection.
-      if (
-        currentStatus === "idle" ||
-        currentStatus === "stopped" ||
-        currentStatus === "dnf"
-      ) {
+      if (currentStatus === "idle") {
+        const currentRound = roomContextRef.current.roundNumber;
+
+        if (currentRound !== undefined && currentRound > 0) {
+          attemptedRoundRef.current = currentRound;
+        }
+
+        startInspection();
+        return;
+      }
+
+      if (currentStatus === "stopped" || currentStatus === "dnf") {
         startInspection();
         return;
       }
@@ -353,13 +417,16 @@ export default function CompetitionTimer({
           });
 
           // Save the solve to the competition room if applicable.
-          if (roomId && scramble?.trim()) {
+          const context = roomContextRef.current;
+
+          if (context.roomId && context.scramble?.trim()) {
             void saveCompetitionSolve({
-              roomId,
+              roomId: context.roomId,
               userId: ownerId,
-              scramble,
+              scramble: context.scramble,
               timeMs: newSolve.timeMs,
               penalty: newSolve.penalty,
+              roundNumber: context.roundNumber,
             }).catch((error) => {
               console.error("Failed to save competition solve:", error);
             });
