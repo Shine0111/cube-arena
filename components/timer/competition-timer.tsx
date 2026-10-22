@@ -17,12 +17,14 @@ async function saveCompetitionSolve({
   scramble,
   timeMs,
   penalty,
+  roundNumber,
 }: {
   roomId: string;
   userId: string;
   scramble: string;
   timeMs: number;
   penalty: "none" | "+2" | "DNF";
+  roundNumber?: number;
 }) {
   const supabase = createClient();
 
@@ -32,6 +34,7 @@ async function saveCompetitionSolve({
     scramble,
     time_ms: Math.round(timeMs),
     penalty,
+    round_number: roundNumber,
   });
 
   if (error) {
@@ -56,6 +59,7 @@ type CompetitionTimerProps = {
   enabled?: boolean;
   roomId?: string;
   scramble?: string | null;
+  roundNumber?: number;
 };
 
 export default function CompetitionTimer({
