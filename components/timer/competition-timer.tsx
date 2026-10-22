@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { SolvePenalty, SolveRecord } from "@/lib/timer/types";
 
 type TimerStatus = "idle" | "holding" | "ready" | "running" | "stopped";
 
@@ -9,6 +10,7 @@ const READY_DELAY_MS = 300;
 export default function CompetitionTimer() {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [elapsedMs, setElapsedMs] = useState(0);
+  const [solves, setSolves] = useState<SolveRecord[]>([]);
 
   const startTimeRef = useRef<number | null>(null);
   const holdTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -52,8 +54,22 @@ export default function CompetitionTimer() {
       const currentStatus = statusRef.current;
 
       if (currentStatus === "running") {
-        if (startTimeRef.current !== null) {
-          setElapsedMs(performance.now() - startTimeRef.current);
+        const endTime = performance.now();
+        const startTime = startTimeRef.current;
+
+        if (startTime !== null) {
+          const finalTimeMs = endTime - startTime;
+
+          setElapsedMs(finalTimeMs);
+
+          const newSolve: SolveRecord = {
+            id: crypto.randomUUID(),
+            timeMs: finalTimeMs,
+            penalty: "none",
+            createdAt: new Date().toISOString(),
+          };
+
+          setSolves((previousSolves) => [newSolve, ...previousSolves]);
         }
 
         startTimeRef.current = null;
@@ -141,6 +157,42 @@ export default function CompetitionTimer() {
       <p className="mt-4 text-xs text-zinc-500">
         Hold Space to prepare. Release to start. Press Space to stop.
       </p>
+
+      <div className="mt-10 text-left">
+        <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
+          <h2 className="text-sm font-semibold tracking-widest text-zinc-300">
+            SOLVE HISTORY
+          </h2>
+          <span className="text-xs text-zinc-500">{solves.length} solves</span>
+        </div>
+
+        {solves.length === 0 ? (
+          <p className="py-6 text-sm text-zinc-500">
+            Your completed solves will appear here.
+          </p>
+        ) : (
+          <ol className="divide-y divide-zinc-800">
+            {solves.map((solve, index) => (
+              <li
+                key={solve.id}
+                className="flex items-center justify-between gap-4 py-3"
+              >
+                <span className="text-sm text-zinc-400">
+                  {solves.length - index}.
+                </span>
+
+                <span className="flex-1 font-mono text-lg tabular-nums">
+                  {(solve.timeMs / 1000).toFixed(2)}
+                </span>
+
+                <span className="text-xs text-zinc-500">
+                  {solve.penalty === "none" ? "OK" : solve.penalty}
+                </span>
+              </li>
+            ))}
+          </ol>
+        )}
+      </div>
     </section>
   );
 }
