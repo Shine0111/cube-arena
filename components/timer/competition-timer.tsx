@@ -6,6 +6,7 @@ import {
   getInspectionPenalty,
   type SolveRecord,
 } from "@/lib/timer/types";
+import { getAllSolves, saveSolve } from "@/lib/timer/solve-storage";
 
 type TimerStatus =
   | "idle"
@@ -37,6 +38,29 @@ export default function CompetitionTimer() {
   const inspectionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+
+  // Load the solve history from IndexedDB when the component mounts.
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadHistory() {
+      try {
+        const savedSolves = await getAllSolves();
+
+        if (!cancelled) {
+          setSolves(savedSolves);
+        }
+      } catch (error) {
+        console.error("Failed to load solve history:", error);
+      }
+    }
+
+    loadHistory();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
 
   // Update the solve timer while a solve is running.
   useEffect(() => {
@@ -95,6 +119,10 @@ export default function CompetitionTimer() {
       };
 
       setSolves((previous) => [newSolve, ...previous]);
+
+      void saveSolve(newSolve).catch((error) => {
+        console.error("Failed to save solve:", error);
+      });
       setInspectionElapsedMs(inspectionMs);
       setElapsedMs(0);
 
@@ -186,6 +214,10 @@ export default function CompetitionTimer() {
 
           setElapsedMs(finalTimeMs);
           setSolves((previous) => [newSolve, ...previous]);
+
+          void saveSolve(newSolve).catch((error) => {
+            console.error("Failed to save solve:", error);
+          });
         }
 
         startTimeRef.current = null;
