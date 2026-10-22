@@ -16,6 +16,7 @@ type Room = {
   scramble_type: string;
   current_scramble: string | null;
   current_round: number;
+  round_status: "waiting" | "in_progress" | "completed";
 };
 
 type RoomMember = {
@@ -370,6 +371,7 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
         roomId={room.id}
         scramble={room.current_scramble}
         roundNumber={room.current_round}
+        roundStatus={room.round_status}
       />
 
       <RoomResults roomId={room.id} />

@@ -59,6 +59,7 @@ type CompetitionTimerProps = {
   roomId?: string;
   scramble?: string | null;
   roundNumber?: number;
+  roundStatus?: "waiting" | "in_progress" | "completed";
 };
 
 export default function CompetitionTimer({
@@ -66,6 +67,7 @@ export default function CompetitionTimer({
   roomId,
   scramble,
   roundNumber,
+  roundStatus = "waiting",
 }: CompetitionTimerProps) {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [elapsedMs, setElapsedMs] = useState(0);
@@ -94,6 +96,7 @@ export default function CompetitionTimer({
     scramble,
     roundNumber,
   });
+  const roundStatusRef = useRef(roundStatus);
 
   const [userId, setUserId] = useState<string | null>(null);
   const [authLoaded, setAuthLoaded] = useState(false);
@@ -209,6 +212,10 @@ export default function CompetitionTimer({
       roundNumber,
     };
   }, [roomId, scramble, roundNumber]);
+
+  useEffect(() => {
+    roundStatusRef.current = roundStatus;
+  }, [roundStatus]);
 
   useEffect(() => {
     if (roundNumber === undefined || roundNumber <= 0) {
@@ -364,6 +371,17 @@ export default function CompetitionTimer({
       }
 
       if (!enabledRef.current) return;
+
+      const context = roomContextRef.current;
+
+      if (
+        context.roundNumber !== undefined &&
+        context.roundNumber > 0 &&
+        roundStatusRef.current !== "in_progress"
+      ) {
+        return;
+      }
+
       event.preventDefault();
       if (event.repeat) return;
 
