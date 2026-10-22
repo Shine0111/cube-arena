@@ -27,10 +27,28 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
   const [members, setMembers] = useState<RoomMember[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [currentUserId, setCurrentUserId] = useState<string | null>(null);
+  const [updatingReady, setUpdatingReady] = useState(false);
 
   useEffect(() => {
     const supabase = createClient();
     let cancelled = false;
+
+    // Load the current user ID
+    async function loadCurrentUser() {
+      const { data, error } = await supabase.auth.getUser();
+
+      if (cancelled) return;
+
+      if (error) {
+        setError(error.message);
+        return;
+      }
+
+      setCurrentUserId(data.user?.id ?? null);
+    }
+
+    void loadCurrentUser();
 
     async function loadRoom() {
       setLoading(true);
@@ -121,6 +139,36 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
     };
   }, [roomId]);
 
+  async function toggleReady() {
+    if (!currentUserId || !room || updatingReady) return;
+
+    const currentMember = members.find(
+      (member) => member.user_id === currentUserId,
+    );
+
+    if (!currentMember) {
+      setError("Your membership in this room could not be found.");
+      return;
+    }
+
+    setUpdatingReady(true);
+    setError("");
+
+    const supabase = createClient();
+
+    const { error: updateError } = await supabase
+      .from("room_members")
+      .update({ is_ready: !currentMember.is_ready })
+      .eq("room_id", room.id)
+      .eq("user_id", currentUserId);
+
+    if (updateError) {
+      setError(updateError.message);
+    }
+
+    setUpdatingReady(false);
+  }
+
   if (loading) {
     return <p className="text-zinc-400">Loading room...</p>;
   }
@@ -154,6 +202,23 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
 
       <div className="rounded-xl border border-zinc-800 bg-zinc-900 p-6">
         <h2 className="text-lg font-semibold">Players ({members.length})</h2>
+
+        {currentUserId &&
+          members.some((member) => member.user_id === currentUserId) && (
+            <button
+              type="button"
+              onClick={toggleReady}
+              disabled={updatingReady}
+              className="mt-4 rounded-lg bg-emerald-500 px-4 py-2 font-semibold text-zinc-950 disabled:opacity-50"
+            >
+              {updatingReady
+                ? "Updating..."
+                : members.find((member) => member.user_id === currentUserId)
+                      ?.is_ready
+                  ? "I'm Ready ✓"
+                  : "Mark Me Ready"}
+            </button>
+          )}
 
         {members.length === 0 ? (
           <p className="mt-3 text-sm text-zinc-400">
