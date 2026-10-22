@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { createClient } from "@/lib/supabase/client";
+import SharedScramble from "./shared-scramble";
 
 type Room = {
   id: string;
@@ -306,6 +307,14 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
           </ul>
         )}
       </div>
+      <SharedScramble
+        roomId={room.id}
+        isHost={
+          members.find((member) => member.user_id === currentUserId)?.role ===
+          "host"
+        }
+        initialScramble={room.current_scramble}
+      />
     </section>
   );
 }
