@@ -1,27 +1,44 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { SolvePenalty, SolveRecord } from "@/lib/timer/types";
+import {
+  getAdjustedTimeMs,
+  getInspectionPenalty,
+  type SolveRecord,
+} from "@/lib/timer/types";
 
-type TimerStatus = "idle" | "holding" | "ready" | "running" | "stopped";
+type TimerStatus =
+  | "idle"
+  | "inspecting"
+  | "holding"
+  | "ready"
+  | "running"
+  | "stopped"
+  | "dnf";
 
 const READY_DELAY_MS = 300;
+const INSPECTION_LIMIT_MS = 15_000;
+const INSPECTION_DNF_MS = 17_000;
 
 export default function CompetitionTimer() {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [elapsedMs, setElapsedMs] = useState(0);
+  const [inspectionElapsedMs, setInspectionElapsedMs] = useState(0);
   const [solves, setSolves] = useState<SolveRecord[]>([]);
 
-  const startTimeRef = useRef<number | null>(null);
-  const holdTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const spaceHeldRef = useRef(false);
   const statusRef = useRef<TimerStatus>("idle");
+  const spaceHeldRef = useRef(false);
 
-  useEffect(() => {
-    statusRef.current = status;
-  }, [status]);
+  const startTimeRef = useRef<number | null>(null);
+  const inspectionStartRef = useRef<number | null>(null);
+  const activeInspectionMsRef = useRef(0);
 
+  const holdTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const inspectionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null,
+  );
+
+  // Update the solve timer while a solve is running.
   useEffect(() => {
     if (status !== "running") return;
 
@@ -34,7 +51,77 @@ export default function CompetitionTimer() {
     return () => clearInterval(interval);
   }, [status]);
 
+  // Update the inspection display using the actual elapsed time.
   useEffect(() => {
+    if (status !== "inspecting" && status !== "holding" && status !== "ready") {
+      return;
+    }
+
+    const interval = setInterval(() => {
+      if (inspectionStartRef.current !== null) {
+        setInspectionElapsedMs(performance.now() - inspectionStartRef.current);
+      }
+    }, 50);
+
+    return () => clearInterval(interval);
+  }, [status]);
+
+  // Handle inspection, preparation, starting, and stopping.
+  useEffect(() => {
+    function clearHoldTimeout() {
+      if (holdTimeoutRef.current !== null) {
+        clearTimeout(holdTimeoutRef.current);
+        holdTimeoutRef.current = null;
+      }
+    }
+
+    function clearInspectionTimeout() {
+      if (inspectionTimeoutRef.current !== null) {
+        clearTimeout(inspectionTimeoutRef.current);
+        inspectionTimeoutRef.current = null;
+      }
+    }
+
+    function recordInspectionDnf(inspectionMs: number) {
+      clearHoldTimeout();
+      clearInspectionTimeout();
+
+      const newSolve: SolveRecord = {
+        id: crypto.randomUUID(),
+        timeMs: 0,
+        inspectionMs,
+        penalty: "DNF",
+        createdAt: new Date().toISOString(),
+      };
+
+      setSolves((previous) => [newSolve, ...previous]);
+      setInspectionElapsedMs(inspectionMs);
+      setElapsedMs(0);
+
+      inspectionStartRef.current = null;
+      startTimeRef.current = null;
+      activeInspectionMsRef.current = inspectionMs;
+
+      statusRef.current = "dnf";
+      setStatus("dnf");
+    }
+
+    function startInspection() {
+      setElapsedMs(0);
+      setInspectionElapsedMs(0);
+      activeInspectionMsRef.current = 0;
+
+      const inspectionStart = performance.now();
+      inspectionStartRef.current = inspectionStart;
+
+      statusRef.current = "inspecting";
+      setStatus("inspecting");
+
+      inspectionTimeoutRef.current = setTimeout(() => {
+        recordInspectionDnf(INSPECTION_DNF_MS);
+      }, INSPECTION_DNF_MS);
+    }
+
     function handleKeyDown(event: KeyboardEvent) {
       if (event.code !== "Space" || event.repeat) return;
 
@@ -53,41 +140,57 @@ export default function CompetitionTimer() {
 
       const currentStatus = statusRef.current;
 
+      // First press starts inspection. After a completed solve,
+      // the next press begins a fresh inspection.
+      if (
+        currentStatus === "idle" ||
+        currentStatus === "stopped" ||
+        currentStatus === "dnf"
+      ) {
+        startInspection();
+        return;
+      }
+
+      // Press Space during inspection and hold for 300 ms
+      // to prepare to start the solve.
+      if (currentStatus === "inspecting") {
+        statusRef.current = "holding";
+        setStatus("holding");
+
+        holdTimeoutRef.current = setTimeout(() => {
+          if (spaceHeldRef.current && statusRef.current === "holding") {
+            statusRef.current = "ready";
+            setStatus("ready");
+          }
+        }, READY_DELAY_MS);
+
+        return;
+      }
+
+      // Press Space during a solve to stop and record it.
       if (currentStatus === "running") {
         const endTime = performance.now();
         const startTime = startTimeRef.current;
 
         if (startTime !== null) {
           const finalTimeMs = endTime - startTime;
-
-          setElapsedMs(finalTimeMs);
+          const inspectionMs = activeInspectionMsRef.current;
 
           const newSolve: SolveRecord = {
             id: crypto.randomUUID(),
             timeMs: finalTimeMs,
-            penalty: "none",
+            inspectionMs,
+            penalty: getInspectionPenalty(inspectionMs),
             createdAt: new Date().toISOString(),
           };
 
-          setSolves((previousSolves) => [newSolve, ...previousSolves]);
+          setElapsedMs(finalTimeMs);
+          setSolves((previous) => [newSolve, ...previous]);
         }
 
         startTimeRef.current = null;
         statusRef.current = "stopped";
         setStatus("stopped");
-        return;
-      }
-
-      if (currentStatus === "idle" || currentStatus === "stopped") {
-        statusRef.current = "holding";
-        setStatus("holding");
-
-        holdTimeoutRef.current = setTimeout(() => {
-          if (spaceHeldRef.current) {
-            statusRef.current = "ready";
-            setStatus("ready");
-          }
-        }, READY_DELAY_MS);
       }
     }
 
@@ -96,19 +199,42 @@ export default function CompetitionTimer() {
 
       spaceHeldRef.current = false;
 
-      if (holdTimeoutRef.current !== null) {
-        clearTimeout(holdTimeoutRef.current);
-        holdTimeoutRef.current = null;
-      }
+      const currentStatus = statusRef.current;
 
-      if (statusRef.current === "ready") {
+      if (currentStatus === "holding" || currentStatus === "ready") {
+        clearHoldTimeout();
+
+        if (currentStatus === "holding") {
+          // Not held long enough: remain in inspection.
+          statusRef.current = "inspecting";
+          setStatus("inspecting");
+          return;
+        }
+
+        const inspectionStart = inspectionStartRef.current;
+
+        if (inspectionStart === null) return;
+
+        const inspectionMs = performance.now() - inspectionStart;
+
+        // Protect the 17-second boundary even if the timeout
+        // and key release happen almost simultaneously.
+        if (inspectionMs >= INSPECTION_DNF_MS) {
+          recordInspectionDnf(inspectionMs);
+          return;
+        }
+
+        clearInspectionTimeout();
+
+        setInspectionElapsedMs(inspectionMs);
+        activeInspectionMsRef.current = inspectionMs;
+        inspectionStartRef.current = null;
+
         startTimeRef.current = performance.now();
         setElapsedMs(0);
+
         statusRef.current = "running";
         setStatus("running");
-      } else if (statusRef.current === "holding") {
-        statusRef.current = "idle";
-        setStatus("idle");
       }
     }
 
@@ -119,21 +245,28 @@ export default function CompetitionTimer() {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
 
-      if (holdTimeoutRef.current !== null) {
-        clearTimeout(holdTimeoutRef.current);
-      }
+      clearHoldTimeout();
+      clearInspectionTimeout();
     };
   }, []);
 
   const seconds = (elapsedMs / 1000).toFixed(2);
+  const inspectionSeconds = inspectionElapsedMs / 1000;
+  const remainingSeconds =
+    Math.max(0, INSPECTION_DNF_MS - inspectionElapsedMs) / 1000;
 
   const statusLabel: Record<TimerStatus, string> = {
-    idle: "HOLD SPACE TO PREPARE",
+    idle: "PRESS SPACE TO INSPECT",
+    inspecting: "INSPECT THE CUBE",
     holding: "KEEP HOLDING...",
-    ready: "READY",
+    ready: "READY — RELEASE TO START",
     running: "SOLVING",
     stopped: "SOLVE COMPLETE",
+    dnf: "DNF — INSPECTION TIME EXCEEDED",
   };
+
+  const isInspecting =
+    status === "inspecting" || status === "holding" || status === "ready";
 
   return (
     <section className="mx-auto w-full max-w-2xl rounded-2xl border border-zinc-800 bg-zinc-950 p-8 text-center text-white">
@@ -143,19 +276,52 @@ export default function CompetitionTimer() {
 
       <p
         className={`mt-8 font-mono text-6xl font-bold tabular-nums sm:text-8xl ${
-          status === "ready" ? "text-emerald-400" : ""
+          status === "ready"
+            ? "text-emerald-400"
+            : status === "dnf"
+              ? "text-red-400"
+              : ""
         }`}
         aria-live="off"
       >
-        {status === "running" || status === "stopped" ? seconds : "0.00"}
+        {status === "dnf"
+          ? "DNF"
+          : status === "running" || status === "stopped"
+            ? seconds
+            : "0.00"}
       </p>
 
       <p className="mt-6 text-sm font-medium tracking-widest text-zinc-400">
         {statusLabel[status]}
       </p>
 
+      {isInspecting && (
+        <div className="mt-5 space-y-2">
+          <p
+            className={`font-mono text-2xl tabular-nums ${
+              inspectionElapsedMs >= INSPECTION_LIMIT_MS
+                ? "text-red-400"
+                : inspectionElapsedMs >= 13_000
+                  ? "text-amber-400"
+                  : "text-zinc-200"
+            }`}
+          >
+            {inspectionSeconds.toFixed(2)}s inspected
+          </p>
+
+          <p className="text-xs text-zinc-500">
+            {remainingSeconds.toFixed(2)}s until inspection DNF
+          </p>
+
+          {inspectionElapsedMs >= INSPECTION_LIMIT_MS && (
+            <p className="text-sm font-semibold text-amber-400">+2 PENALTY</p>
+          )}
+        </div>
+      )}
+
       <p className="mt-4 text-xs text-zinc-500">
-        Hold Space to prepare. Release to start. Press Space to stop.
+        Press Space to inspect. Hold Space for 300 ms, then release to start.
+        Press Space again to stop.
       </p>
 
       <div className="mt-10 text-left">
@@ -172,24 +338,44 @@ export default function CompetitionTimer() {
           </p>
         ) : (
           <ol className="divide-y divide-zinc-800">
-            {solves.map((solve, index) => (
-              <li
-                key={solve.id}
-                className="flex items-center justify-between gap-4 py-3"
-              >
-                <span className="text-sm text-zinc-400">
-                  {solves.length - index}.
-                </span>
+            {solves.map((solve, index) => {
+              const adjustedTime = getAdjustedTimeMs(solve);
 
-                <span className="flex-1 font-mono text-lg tabular-nums">
-                  {(solve.timeMs / 1000).toFixed(2)}
-                </span>
+              return (
+                <li
+                  key={solve.id}
+                  className="flex items-center justify-between gap-4 py-3"
+                >
+                  <span className="text-sm text-zinc-400">
+                    {solves.length - index}.
+                  </span>
 
-                <span className="text-xs text-zinc-500">
-                  {solve.penalty === "none" ? "OK" : solve.penalty}
-                </span>
-              </li>
-            ))}
+                  <div className="flex-1">
+                    <p className="font-mono text-lg tabular-nums">
+                      {adjustedTime === null
+                        ? "DNF"
+                        : (adjustedTime / 1000).toFixed(2)}
+                    </p>
+
+                    <p className="text-xs text-zinc-500">
+                      Inspection: {(solve.inspectionMs / 1000).toFixed(2)}s
+                    </p>
+                  </div>
+
+                  <span
+                    className={`text-xs font-semibold ${
+                      solve.penalty === "DNF"
+                        ? "text-red-400"
+                        : solve.penalty === "+2"
+                          ? "text-amber-400"
+                          : "text-emerald-400"
+                    }`}
+                  >
+                    {solve.penalty === "none" ? "OK" : solve.penalty}
+                  </span>
+                </li>
+              );
+            })}
           </ol>
         )}
       </div>
