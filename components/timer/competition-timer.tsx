@@ -13,6 +13,13 @@ export default function CompetitionTimer() {
   const startTimeRef = useRef<number | null>(null);
   const holdTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
+  const spaceHeldRef = useRef(false);
+  const statusRef = useRef<TimerStatus>("idle");
+
+  useEffect(() => {
+    statusRef.current = status;
+  }, [status]);
+
   useEffect(() => {
     if (status !== "running") return;
 
@@ -40,22 +47,30 @@ export default function CompetitionTimer() {
       }
 
       event.preventDefault();
+      spaceHeldRef.current = true;
 
-      if (status === "running") {
+      const currentStatus = statusRef.current;
+
+      if (currentStatus === "running") {
         if (startTimeRef.current !== null) {
           setElapsedMs(performance.now() - startTimeRef.current);
         }
 
         startTimeRef.current = null;
+        statusRef.current = "stopped";
         setStatus("stopped");
         return;
       }
 
-      if (status === "idle" || status === "stopped") {
+      if (currentStatus === "idle" || currentStatus === "stopped") {
+        statusRef.current = "holding";
         setStatus("holding");
 
         holdTimeoutRef.current = setTimeout(() => {
-          setStatus("ready");
+          if (spaceHeldRef.current) {
+            statusRef.current = "ready";
+            setStatus("ready");
+          }
         }, READY_DELAY_MS);
       }
     }
@@ -63,16 +78,20 @@ export default function CompetitionTimer() {
     function handleKeyUp(event: KeyboardEvent) {
       if (event.code !== "Space") return;
 
+      spaceHeldRef.current = false;
+
       if (holdTimeoutRef.current !== null) {
         clearTimeout(holdTimeoutRef.current);
         holdTimeoutRef.current = null;
       }
 
-      if (status === "ready") {
+      if (statusRef.current === "ready") {
         startTimeRef.current = performance.now();
         setElapsedMs(0);
+        statusRef.current = "running";
         setStatus("running");
-      } else if (status === "holding") {
+      } else if (statusRef.current === "holding") {
+        statusRef.current = "idle";
         setStatus("idle");
       }
     }
@@ -88,7 +107,7 @@ export default function CompetitionTimer() {
         clearTimeout(holdTimeoutRef.current);
       }
     };
-  }, [status]);
+  }, []);
 
   const seconds = (elapsedMs / 1000).toFixed(2);
 
