@@ -75,6 +75,8 @@ export default function CompetitionTimer({
   const statusRef = useRef<TimerStatus>("idle");
   const spaceHeldRef = useRef(false);
   const attemptedRoundRef = useRef<number | null>(null);
+  const submittedRoundRef = useRef<number | null>(null);
+  const submittingRef = useRef(false);
 
   const startTimeRef = useRef<number | null>(null);
   const inspectionStartRef = useRef<number | null>(null);
@@ -230,6 +232,9 @@ export default function CompetitionTimer({
     inspectionStartRef.current = null;
     activeInspectionMsRef.current = 0;
 
+    submittedRoundRef.current = null;
+    submittingRef.current = false;
+
     statusRef.current = "idle";
     setStatus("idle");
     setElapsedMs(0);
@@ -279,7 +284,21 @@ export default function CompetitionTimer({
         // Save the DNF solve to the competition room if applicable.
         const context = roomContextRef.current;
 
-        if (context.roomId && context.scramble?.trim()) {
+        if (
+          context.roomId &&
+          context.scramble?.trim() &&
+          context.roundNumber !== undefined &&
+          context.roundNumber > 0
+        ) {
+          if (
+            submittingRef.current ||
+            submittedRoundRef.current === context.roundNumber
+          ) {
+            return;
+          }
+
+          submittingRef.current = true;
+
           void saveCompetitionSolve({
             roomId: context.roomId,
             userId: ownerId,
@@ -287,9 +306,16 @@ export default function CompetitionTimer({
             timeMs: newSolve.timeMs,
             penalty: newSolve.penalty,
             roundNumber: context.roundNumber,
-          }).catch((error) => {
-            console.error("Failed to save competition solve:", error);
-          });
+          })
+            .then(() => {
+              submittedRoundRef.current = context.roundNumber!;
+            })
+            .catch((error) => {
+              console.error("Failed to save competition DNF:", error);
+            })
+            .finally(() => {
+              submittingRef.current = false;
+            });
         }
       }
 
@@ -419,7 +445,21 @@ export default function CompetitionTimer({
           // Save the solve to the competition room if applicable.
           const context = roomContextRef.current;
 
-          if (context.roomId && context.scramble?.trim()) {
+          if (
+            context.roomId &&
+            context.scramble?.trim() &&
+            context.roundNumber !== undefined &&
+            context.roundNumber > 0
+          ) {
+            if (
+              submittingRef.current ||
+              submittedRoundRef.current === context.roundNumber
+            ) {
+              return;
+            }
+
+            submittingRef.current = true;
+
             void saveCompetitionSolve({
               roomId: context.roomId,
               userId: ownerId,
@@ -427,9 +467,16 @@ export default function CompetitionTimer({
               timeMs: newSolve.timeMs,
               penalty: newSolve.penalty,
               roundNumber: context.roundNumber,
-            }).catch((error) => {
-              console.error("Failed to save competition solve:", error);
-            });
+            })
+              .then(() => {
+                submittedRoundRef.current = context.roundNumber!;
+              })
+              .catch((error) => {
+                console.error("Failed to save competition solve:", error);
+              })
+              .finally(() => {
+                submittingRef.current = false;
+              });
           }
         }
 
