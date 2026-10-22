@@ -8,6 +8,7 @@ import {
 } from "@/lib/timer/types";
 import { getAllSolves, saveSolve } from "@/lib/timer/solve-storage";
 import { createClient } from "@/lib/supabase/client";
+import { getAo5, getBestSingle, getSolveCount } from "@/lib/timer/statistics";
 
 type TimerStatus =
   | "idle"
@@ -369,12 +370,22 @@ export default function CompetitionTimer() {
   const isInspecting =
     status === "inspecting" || status === "holding" || status === "ready";
 
+  const solveCount = getSolveCount(solves);
+  const bestSingle = getBestSingle(solves);
+  const ao5 = getAo5(solves);
+
+  function formatResult(timeMs: number | null | "DNF") {
+    if (timeMs === null) return "—";
+    if (timeMs === "DNF") return "DNF";
+
+    return (timeMs / 1000).toFixed(2);
+  }
+
   return (
     <section className="mx-auto w-full max-w-2xl rounded-2xl border border-zinc-800 bg-zinc-950 p-8 text-center text-white">
       <p className="text-sm font-semibold tracking-[0.2em] text-zinc-400">
         CUBE ARENA · COMPETITION TIMER
       </p>
-
       <p
         className={`mt-8 font-mono text-6xl font-bold tabular-nums sm:text-8xl ${
           status === "ready"
@@ -391,11 +402,9 @@ export default function CompetitionTimer() {
             ? seconds
             : "0.00"}
       </p>
-
       <p className="mt-6 text-sm font-medium tracking-widest text-zinc-400">
         {statusLabel[status]}
       </p>
-
       {isInspecting && (
         <div className="mt-5 space-y-2">
           <p
@@ -419,12 +428,33 @@ export default function CompetitionTimer() {
           )}
         </div>
       )}
-
       <p className="mt-4 text-xs text-zinc-500">
         Press Space to inspect. Hold Space for 300 ms, then release to start.
         Press Space again to stop.
       </p>
+      {/* Statistics  */}
+      <div className="mt-10 grid grid-cols-3 gap-3">
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-3">
+          <p className="text-xs text-zinc-500">SOLVES</p>
+          <p className="mt-2 text-2xl font-semibold tabular-nums">
+            {solveCount}
+          </p>
+        </div>
 
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-3">
+          <p className="text-xs text-zinc-500">BEST SINGLE</p>
+          <p className="mt-2 text-2xl font-semibold tabular-nums">
+            {bestSingle === null ? "—" : formatResult(bestSingle)}
+          </p>
+        </div>
+
+        <div className="rounded-xl border border-zinc-800 bg-zinc-900/60 p-3">
+          <p className="text-xs text-zinc-500">AO5</p>
+          <p className="mt-2 text-2xl font-semibold tabular-nums">
+            {formatResult(ao5)}
+          </p>
+        </div>
+      </div>
       <div className="mt-10 text-left">
         <div className="flex items-center justify-between border-b border-zinc-800 pb-3">
           <h2 className="text-sm font-semibold tracking-widest text-zinc-300">
