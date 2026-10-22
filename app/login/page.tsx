@@ -1,4 +1,5 @@
 import LoginForm from "@/components/login-form";
+import Link from "next/link";
 
 export default function LoginPage() {
   return (
@@ -10,6 +11,11 @@ export default function LoginPage() {
       </p>
 
       <LoginForm />
+      <p className="mt-4 text-right text-sm">
+        <Link href="/forgot-password" className="underline">
+          Forgot your password?
+        </Link>
+      </p>
     </main>
   );
 }
