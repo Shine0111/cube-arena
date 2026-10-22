@@ -127,7 +127,33 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
           table: "room_members",
           filter: `room_id=eq.${roomId}`,
         },
-        () => {
+        (payload) => {
+          if (payload.eventType === "UPDATE") {
+            const updated = payload.new as {
+              room_id: string;
+              user_id: string;
+              role: "host" | "player";
+              is_ready: boolean;
+            };
+
+            if (updated.room_id !== roomId) return;
+
+            setMembers((current) =>
+              current.map((member) =>
+                member.user_id === updated.user_id
+                  ? {
+                      ...member,
+                      role: updated.role,
+                      is_ready: updated.is_ready,
+                    }
+                  : member,
+              ),
+            );
+
+            return;
+          }
+
+          // Inserts and deletes still reload the membership list.
           void loadRoom();
         },
       )
@@ -151,22 +177,55 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
       return;
     }
 
+    const previousReady = currentMember.is_ready;
+    const nextReady = !previousReady;
+
     setUpdatingReady(true);
     setError("");
 
-    const supabase = createClient();
+    // Update the UI immediately.
+    setMembers((current) =>
+      current.map((member) =>
+        member.user_id === currentUserId
+          ? { ...member, is_ready: nextReady }
+          : member,
+      ),
+    );
 
-    const { error: updateError } = await supabase
-      .from("room_members")
-      .update({ is_ready: !currentMember.is_ready })
-      .eq("room_id", room.id)
-      .eq("user_id", currentUserId);
+    try {
+      const supabase = createClient();
 
-    if (updateError) {
-      setError(updateError.message);
+      const { error: updateError } = await supabase
+        .from("room_members")
+        .update({ is_ready: nextReady })
+        .eq("room_id", room.id)
+        .eq("user_id", currentUserId);
+
+      if (updateError) {
+        // Roll back if Supabase rejects the update.
+        setMembers((current) =>
+          current.map((member) =>
+            member.user_id === currentUserId
+              ? { ...member, is_ready: previousReady }
+              : member,
+          ),
+        );
+
+        setError(updateError.message);
+      }
+    } catch {
+      setMembers((current) =>
+        current.map((member) =>
+          member.user_id === currentUserId
+            ? { ...member, is_ready: previousReady }
+            : member,
+        ),
+      );
+
+      setError("Could not update your ready status. Please try again.");
+    } finally {
+      setUpdatingReady(false);
     }
-
-    setUpdatingReady(false);
   }
 
   if (loading) {
