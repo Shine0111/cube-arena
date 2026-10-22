@@ -214,7 +214,7 @@ export default function CompetitionTimer() {
     }
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.code !== "Space" || event.repeat) return;
+      if (event.code !== "Space") return;
 
       const target = event.target;
 
@@ -231,6 +231,7 @@ export default function CompetitionTimer() {
       }
 
       event.preventDefault();
+      if (event.repeat) return;
       spaceHeldRef.current = true;
 
       const currentStatus = statusRef.current;
