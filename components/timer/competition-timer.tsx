@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import {
   getAdjustedTimeMs,
   getInspectionPenalty,
   type SolveRecord,
 } from "@/lib/timer/types";
 import { getAllSolves, saveSolve } from "@/lib/timer/solve-storage";
+import { createClient } from "@/lib/supabase/client";
 
 type TimerStatus =
   | "idle"
@@ -38,14 +39,67 @@ export default function CompetitionTimer() {
   const inspectionTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
     null,
   );
+  const userIdRef = useRef<string | null>(null);
+  const authLoadedRef = useRef(false);
+
+  const [userId, setUserId] = useState<string | null>(null);
+  const [authLoaded, setAuthLoaded] = useState(false);
+
+  useEffect(() => {
+    userIdRef.current = userId;
+    authLoadedRef.current = authLoaded;
+  }, [userId, authLoaded]);
+
+  const supabase = useMemo(() => createClient(), []);
+
+  // Load the signed-in user from Supabase when the component mounts.
+  useEffect(() => {
+    let cancelled = false;
+
+    async function loadUser() {
+      try {
+        const {
+          data: { user },
+          error,
+        } = await supabase.auth.getUser();
+
+        if (error) throw error;
+
+        if (!cancelled) {
+          setUserId(user?.id ?? null);
+        }
+      } catch (error) {
+        console.error("Failed to load signed-in user:", error);
+
+        if (!cancelled) {
+          setUserId(null);
+        }
+      } finally {
+        if (!cancelled) {
+          setAuthLoaded(true);
+        }
+      }
+    }
+
+    loadUser();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [supabase]);
 
   // Load the solve history from IndexedDB when the component mounts.
   useEffect(() => {
+    if (!authLoaded || !userId) {
+      setSolves([]);
+      return;
+    }
+
     let cancelled = false;
 
     async function loadHistory() {
       try {
-        const savedSolves = await getAllSolves();
+        const savedSolves = await getAllSolves(userId!);
 
         if (!cancelled) {
           setSolves(savedSolves);
@@ -60,7 +114,7 @@ export default function CompetitionTimer() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [authLoaded, userId]);
 
   // Update the solve timer while a solve is running.
   useEffect(() => {
@@ -92,6 +146,8 @@ export default function CompetitionTimer() {
 
   // Handle inspection, preparation, starting, and stopping.
   useEffect(() => {
+    const currentUserId = () => userIdRef.current;
+
     function clearHoldTimeout() {
       if (holdTimeoutRef.current !== null) {
         clearTimeout(holdTimeoutRef.current);
@@ -110,19 +166,25 @@ export default function CompetitionTimer() {
       clearHoldTimeout();
       clearInspectionTimeout();
 
-      const newSolve: SolveRecord = {
-        id: crypto.randomUUID(),
-        timeMs: 0,
-        inspectionMs,
-        penalty: "DNF",
-        createdAt: new Date().toISOString(),
-      };
+      const ownerId = currentUserId();
 
-      setSolves((previous) => [newSolve, ...previous]);
+      if (ownerId) {
+        const newSolve: SolveRecord = {
+          id: crypto.randomUUID(),
+          userId: ownerId,
+          timeMs: 0,
+          inspectionMs,
+          penalty: "DNF",
+          createdAt: new Date().toISOString(),
+        };
 
-      void saveSolve(newSolve).catch((error) => {
-        console.error("Failed to save solve:", error);
-      });
+        setSolves((previous) => [newSolve, ...previous]);
+
+        void saveSolve(newSolve).catch((error) => {
+          console.error("Failed to save solve:", error);
+        });
+      }
+
       setInspectionElapsedMs(inspectionMs);
       setElapsedMs(0);
 
@@ -163,6 +225,10 @@ export default function CompetitionTimer() {
         return;
       }
 
+      if (!authLoadedRef.current || !userIdRef.current) {
+        return;
+      }
+
       event.preventDefault();
       spaceHeldRef.current = true;
 
@@ -200,12 +266,15 @@ export default function CompetitionTimer() {
         const endTime = performance.now();
         const startTime = startTimeRef.current;
 
-        if (startTime !== null) {
+        const ownerId = currentUserId();
+
+        if (startTime !== null && ownerId) {
           const finalTimeMs = endTime - startTime;
           const inspectionMs = activeInspectionMsRef.current;
 
           const newSolve: SolveRecord = {
             id: crypto.randomUUID(),
+            userId: ownerId,
             timeMs: finalTimeMs,
             inspectionMs,
             penalty: getInspectionPenalty(inspectionMs),

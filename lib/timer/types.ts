@@ -2,6 +2,7 @@ export type SolvePenalty = "none" | "+2" | "DNF";
 
 export type SolveRecord = {
   id: string;
+  userId: string;
   timeMs: number;
   inspectionMs: number;
   penalty: SolvePenalty;

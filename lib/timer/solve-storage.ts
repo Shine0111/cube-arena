@@ -28,7 +28,7 @@ function openDatabase(): Promise<IDBDatabase> {
   });
 }
 
-export async function getAllSolves(): Promise<SolveRecord[]> {
+export async function getAllSolves(userId: string): Promise<SolveRecord[]> {
   const database = await openDatabase();
 
   try {
@@ -37,7 +37,9 @@ export async function getAllSolves(): Promise<SolveRecord[]> {
       const request = transaction.objectStore(STORE_NAME).getAll();
 
       request.onsuccess = () => {
-        const solves = request.result as SolveRecord[];
+        const solves = (request.result as SolveRecord[]).filter(
+          (solve) => solve.userId === userId,
+        );
 
         solves.sort(
           (a, b) =>
