@@ -9,6 +9,35 @@ import {
 import { getAllSolves, saveSolve } from "@/lib/timer/solve-storage";
 import { createClient } from "@/lib/supabase/client";
 import { getAo5, getBestSingle, getSolveCount } from "@/lib/timer/statistics";
+import { log } from "console";
+
+async function saveCompetitionSolve({
+  roomId,
+  userId,
+  scramble,
+  timeMs,
+  penalty,
+}: {
+  roomId: string;
+  userId: string;
+  scramble: string;
+  timeMs: number;
+  penalty: "none" | "+2" | "DNF";
+}) {
+  const supabase = createClient();
+
+  const { error } = await supabase.from("room_solves").insert({
+    room_id: roomId,
+    user_id: userId,
+    scramble,
+    time_ms: Math.round(timeMs),
+    penalty,
+  });
+
+  if (error) {
+    throw error;
+  }
+}
 
 type TimerStatus =
   | "idle"
@@ -25,10 +54,14 @@ const INSPECTION_DNF_MS = 17_000;
 
 type CompetitionTimerProps = {
   enabled?: boolean;
+  roomId?: string;
+  scramble?: string | null;
 };
 
 export default function CompetitionTimer({
   enabled = true,
+  roomId,
+  scramble,
 }: CompetitionTimerProps) {
   const [status, setStatus] = useState<TimerStatus>("idle");
   const [elapsedMs, setElapsedMs] = useState(0);
@@ -195,6 +228,19 @@ export default function CompetitionTimer({
         void saveSolve(newSolve).catch((error) => {
           console.error("Failed to save solve:", error);
         });
+
+        // Save the DNF solve to the competition room if applicable.
+        if (roomId && scramble?.trim()) {
+          void saveCompetitionSolve({
+            roomId,
+            userId: ownerId,
+            scramble,
+            timeMs: newSolve.timeMs,
+            penalty: newSolve.penalty,
+          }).catch((error) => {
+            console.error("Failed to save competition solve:", error);
+          });
+        }
       }
 
       setInspectionElapsedMs(inspectionMs);
@@ -277,6 +323,8 @@ export default function CompetitionTimer({
 
       // Press Space during a solve to stop and record it.
       if (currentStatus === "running") {
+        console.log("RUNNING");
+
         const endTime = performance.now();
         const startTime = startTimeRef.current;
 
@@ -301,6 +349,19 @@ export default function CompetitionTimer({
           void saveSolve(newSolve).catch((error) => {
             console.error("Failed to save solve:", error);
           });
+
+          // Save the solve to the competition room if applicable.
+          if (roomId && scramble?.trim()) {
+            void saveCompetitionSolve({
+              roomId,
+              userId: ownerId,
+              scramble,
+              timeMs: newSolve.timeMs,
+              penalty: newSolve.penalty,
+            }).catch((error) => {
+              console.error("Failed to save competition solve:", error);
+            });
+          }
         }
 
         startTimeRef.current = null;

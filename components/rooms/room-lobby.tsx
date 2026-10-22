@@ -362,7 +362,12 @@ export default function RoomLobby({ roomId }: { roomId: string }) {
         }
         roomStatus={room.status}
       />
-      <CompetitionTimer enabled={room.status === "in_progress"} />
+
+      <CompetitionTimer
+        enabled={room.status === "in_progress"}
+        roomId={room.id}
+        scramble={room.current_scramble}
+      />
     </section>
   );
 }
